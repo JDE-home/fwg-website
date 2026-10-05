@@ -1,12 +1,272 @@
 [
-{"id":"poppenberg","name":"Bernhard Poppenberg","role":"Vorsitzender FWG Oelde e. V.","tag":"Vorstand","bio":"Seit der Wahl zum Vorsitzenden führt er die FWG mit Blick für solide Finanzen und Bürgernähe.","look":["#e8b894","#8a8a8a","#1f4a36","short",false,false]},
-{"id":"keller","name":"Sabine Keller","role":"Fraktionsvorsitzende","tag":"Rat","bio":"Schwerpunkt Haushalt und Stadtentwicklung. Findet, dass Zahlen auch Geschichten erzählen.","look":["#f2c9a8","#5a3420","#e8833a","bob",true,false]},
-{"id":"brinkmann","name":"Thomas Brinkmann","role":"Stellv. Fraktionsvorsitzender","tag":"Rat","bio":"Mittelstand, Gewerbe und Wirtschaftsförderung – für starke Betriebe vor Ort.","look":["#d9a47e","#2a2018","#2b5d8a","short",false,true]},
-{"id":"wessels","name":"Anja Wessels","role":"Ratsmitglied · Schule & Familie","tag":"Rat","bio":"Setzt sich für moderne Schulen, Schulsozialarbeit und gute Kitas ein.","look":["#f5d3b8","#b5651d","#7a4aa0","long",false,false]},
-{"id":"hartmann","name":"Markus Hartmann","role":"Ratsmitglied · Bau & Verkehr","tag":"Rat","bio":"Will sichere Radwege, funktionierende Straßen und bezahlbaren Wohnraum.","look":["#c68b64","#1c1c1c","#2f8f8f","curly",true,false]},
-{"id":"vogt","name":"Ulrike Vogt","role":"Ratsmitglied · Umwelt & Klima","tag":"Rat","bio":"Klimaanpassung, Starkregenvorsorge und mehr Grün in der Stadt.","look":["#eac3a2","#9a9a9a","#1f6f4a","bob",false,false]},
-{"id":"demir","name":"Emre Demir","role":"Ratsmitglied · Soziales & Integration","tag":"Rat","bio":"Brückenbauer zwischen Vereinen, Ehrenamt und Neubürgern.","look":["#b97f58","#1c1410","#c2485b","short",false,true]},
-{"id":"lohmann","name":"Georg Lohmann","role":"Sachkundiger Bürger · Finanzen","tag":"Ausschuss","bio":"Langjährige Erfahrung in der Verwaltung – achtet auf jeden Euro.","look":["#efc4a0","#d8d8d8","#3a3a4a","bald",true,true]},
-{"id":"schulte","name":"Claudia Schulte","role":"Sachkundige Bürgerin · Kultur","tag":"Ausschuss","bio":"Für Kultur, Märkte und Veranstaltungen, die Oelde lebendig machen.","look":["#f7d9c2","#7a2e2e","#e8833a","long",true,false]},
-{"id":"nowak","name":"Jan Nowak","role":"Sachkundiger Bürger · Jugend & Sport","tag":"Ausschuss","bio":"Sportvereine stärken, Jugendräume schaffen, Ehrenamt fördern.","look":["#d6a07a","#4a3020","#2b5d8a","curly",false,false]}
+ {
+  "id": "retzlaff",
+  "name": "Thorsten Retzlaff",
+  "role": "Fraktionsvorsitzender",
+  "tag": "Fraktion",
+  "bio": "Soziales, Familien, Senioren, Teilhabe, Jugendhilfe, Wirtschaftsförderung · Ortsentwicklung Sünninghausen",
+  "look": [
+   "#e8b894",
+   "#2a2018",
+   "#29488b",
+   "short",
+   true,
+   false
+  ]
+ },
+ {
+  "id": "knop",
+  "name": "Felix Knop",
+  "role": "Stellv. Fraktionsvorsitzender",
+  "tag": "Fraktion",
+  "bio": "Schule, Kultur, Sport, Wirtschaftsförderung · Ortsentwicklung Stromberg",
+  "look": [
+   "#c68b64",
+   "#4a3020",
+   "#29488b",
+   "short",
+   false,
+   false
+  ]
+ },
+ {
+  "id": "populoh",
+  "name": "Thomas Populoh",
+  "role": "Ratsmitglied",
+  "tag": "Fraktion",
+  "bio": "Soziales, Finanzen, Wirtschaftsförderung, Bürgerangelegenheiten · Ortsentwicklung Lette",
+  "look": [
+   "#d6a07a",
+   "#9a9a9a",
+   "#ff984f",
+   "bald",
+   false,
+   false
+  ]
+ },
+ {
+  "id": "poppenberg",
+  "name": "Bernhard Poppenberg",
+  "role": "Ratsmitglied · Vorsitzender des Vereins",
+  "tag": "Fraktion",
+  "bio": "Umwelt, Energie, Mobilität und Verkehr, Forum, Bürgerangelegenheiten · Ortsentwicklung Stromberg",
+  "look": [
+   "#f2c9a8",
+   "#8a8a8a",
+   "#1f3a73",
+   "short",
+   true,
+   true
+  ]
+ },
+ {
+  "id": "steuer",
+  "name": "Manuela Steuer",
+  "role": "Ratsmitglied",
+  "tag": "Fraktion",
+  "bio": "Mittel für Straßen, Kitas, Schulen und Wohnraum statt Großprojekte; Bürgerdialog",
+  "look": [
+   "#f5d3b8",
+   "#2a2018",
+   "#4f7bd6",
+   "bob",
+   false,
+   false
+  ]
+ },
+ {
+  "id": "bless",
+  "name": "Hubert Bleß",
+  "role": "Sachkundiger Bürger",
+  "tag": "Sachkundig",
+  "bio": "Soziales, Familien, Senioren, Finanzen, Wirtschaftsförderung",
+  "look": [
+   "#eac3a2",
+   "#4a3020",
+   "#c2485b",
+   "short",
+   false,
+   false
+  ]
+ },
+ {
+  "id": "fibbe",
+  "name": "Thorsten Fibbe",
+  "role": "Sachkundiger Bürger",
+  "tag": "Sachkundig",
+  "bio": "Soziales, Familien, Senioren, Finanzen, Wirtschaftsförderung",
+  "look": [
+   "#d9a47e",
+   "#1c1c1c",
+   "#2f8f8f",
+   "curly",
+   false,
+   false
+  ]
+ },
+ {
+  "id": "hoberg",
+  "name": "Friedhelm Hoberg",
+  "role": "Sachkundiger Bürger · Beisitzer",
+  "tag": "Sachkundig",
+  "bio": "Soziales, Finanzen, Wirtschaftsförderung · 17 Jahre Vorsitzender",
+  "look": [
+   "#efc4a0",
+   "#9a9a9a",
+   "#c2485b",
+   "bald",
+   true,
+   false
+  ]
+ },
+ {
+  "id": "aschulz",
+  "name": "Annelie Schulz",
+  "role": "Sachkundige Bürgerin",
+  "tag": "Sachkundig",
+  "bio": "Soziales, Familien, Senioren, Finanzen, Wirtschaftsförderung",
+  "look": [
+   "#e8b894",
+   "#b5651d",
+   "#2f8f8f",
+   "long",
+   false,
+   false
+  ]
+ },
+ {
+  "id": "rdesel",
+  "name": "Ralph Desel",
+  "role": "Sachkundiger Bürger · Sünninghausen",
+  "tag": "Sachkundig",
+  "bio": "Umwelt, Energie, Mobilität und Verkehr, Forum",
+  "look": [
+   "#c68b64",
+   "#4a3020",
+   "#122450",
+   "short",
+   false,
+   false
+  ]
+ },
+ {
+  "id": "hakenholt",
+  "name": "Achim Hakenholt",
+  "role": "Sachkundiger Bürger · Lette · Stellv. Vorsitzender",
+  "tag": "Sachkundig",
+  "bio": "Umwelt, Energie, Mobilität und Verkehr, Forum",
+  "look": [
+   "#d6a07a",
+   "#1c1c1c",
+   "#1f3a73",
+   "short",
+   true,
+   false
+  ]
+ },
+ {
+  "id": "kemper",
+  "name": "Sebastian Kemper",
+  "role": "Sachkundiger Bürger · Stromberg",
+  "tag": "Sachkundig",
+  "bio": "Umwelt, Energie, Mobilität und Verkehr, Forum",
+  "look": [
+   "#f2c9a8",
+   "#1c1c1c",
+   "#2f8f8f",
+   "curly",
+   false,
+   false
+  ]
+ },
+ {
+  "id": "schestak",
+  "name": "Anna Schestak",
+  "role": "Sachkundige Bürgerin · Sünninghausen",
+  "tag": "Sachkundig",
+  "bio": "Umwelt, Energie, Mobilität und Verkehr, Forum",
+  "look": [
+   "#f5d3b8",
+   "#1c1c1c",
+   "#ff984f",
+   "bob",
+   false,
+   false
+  ]
+ },
+ {
+  "id": "specken",
+  "name": "Andreas Specken",
+  "role": "Sachkundiger Bürger · Stromberg",
+  "tag": "Sachkundig",
+  "bio": "Umwelt, Energie, Mobilität und Verkehr, Forum",
+  "look": [
+   "#eac3a2",
+   "#7a2e2e",
+   "#4f7bd6",
+   "short",
+   false,
+   true
+  ]
+ },
+ {
+  "id": "fertich",
+  "name": "Alexander Fertich",
+  "role": "Sachkundiger Bürger · Kassierer",
+  "tag": "Sachkundig",
+  "bio": "Schule, Kultur, Sport, Wirtschaftsförderung",
+  "look": [
+   "#d9a47e",
+   "#d8d8d8",
+   "#29488b",
+   "short",
+   false,
+   false
+  ]
+ },
+ {
+  "id": "haensel",
+  "name": "Katja Hänsel",
+  "role": "Sachkundige Bürgerin · Lette",
+  "tag": "Sachkundig",
+  "bio": "Schule, Kultur, Sport, Wirtschaftsförderung",
+  "look": [
+   "#efc4a0",
+   "#1c1c1c",
+   "#4f7bd6",
+   "long",
+   false,
+   false
+  ]
+ },
+ {
+  "id": "pickenaecker",
+  "name": "Rolf Pickenäcker",
+  "role": "Sachkundiger Bürger · Sünninghausen",
+  "tag": "Sachkundig",
+  "bio": "Schule, Kultur, Sport, Wirtschaftsförderung",
+  "look": [
+   "#e8b894",
+   "#9a9a9a",
+   "#c2485b",
+   "bald",
+   true,
+   false
+  ]
+ },
+ {
+  "id": "sumkoetter",
+  "name": "Andreas Sumkötter",
+  "role": "Sachkundiger Bürger",
+  "tag": "Sachkundig",
+  "bio": "Schule, Kultur, Sport, Wirtschaftsförderung",
+  "look": [
+   "#c68b64",
+   "#7a2e2e",
+   "#122450",
+   "short",
+   false,
+   false
+  ]
+ }
 ]
