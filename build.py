@@ -51,6 +51,23 @@ topics=[("gemeinschaft","🤝","Gemeinschaft &amp; Bürgernähe","Ehrenamt, Kult
 ("stadt","🏙️","Lebenswerte Stadt","Bezahlbar, barrierefrei und mit guter Infrastruktur.",
  ["Bezahlbarer und barrierefreier Wohnraum","Sanierung der Geiststraße","Barrierefreiheit in der Innenstadt","Wiederaufbau der Gläsernen Küche im Park","Gutes Freizeit- und Sportstättenangebot"])]
 
+
+def contact_form(kind, submit_cls="btn-primary"):
+    """Echtes Formular -> api/contact.php (siehe assets/js/main.js)."""
+    if kind == "mitmachen":
+        top = '<div class="row2"><label>Vorname<input required name="vorname" autocomplete="given-name" maxlength="60"></label><label>Nachname<input required name="nachname" autocomplete="family-name" maxlength="60"></label></div>'
+        mid = '<label>E-Mail<input type="email" required name="email" autocomplete="email" maxlength="200"></label><label>Ich möchte<select name="topic"><option>Mitglied werden</option><option>Mehr Informationen</option><option>Spenden</option><option>Sonstiges</option></select></label><label>Nachricht (optional)<textarea rows="4" name="message" maxlength="5000"></textarea></label>'
+    else:
+        top = '<div class="row2"><label>Name<input required name="name" autocomplete="name" maxlength="120"></label><label>Telefon (optional)<input type="tel" name="phone" autocomplete="tel" maxlength="50"></label></div>'
+        mid = '<label>E-Mail<input type="email" required name="email" autocomplete="email" maxlength="200"></label><label>Nachricht<textarea rows="5" required minlength="5" name="message" maxlength="5000"></textarea></label>'
+    return f'''<form data-contact action="api/contact.php" method="post" novalidate>
+<input type="hidden" name="form" value="{kind}"><input type="hidden" name="ts" value="">
+<div class="hp" aria-hidden="true"><label>Bitte leer lassen<input name="website" tabindex="-1" autocomplete="off"></label></div>
+{top}{mid}
+<label class="check"><input type="checkbox" name="privacy" value="1" required><span>Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage verwendet werden.</span></label>
+<button class="btn {submit_cls}" type="submit">Absenden</button>
+<div class="form-status" role="status" aria-live="polite"></div></form>'''
+
 pages = {}
 # ---------- Start
 home_cards = "".join(card(i,t,d,f"programm.html#{k}") for k,i,t,d,_ in [topics[1],topics[2],topics[3],topics[6],topics[5],topics[0]])
@@ -142,7 +159,7 @@ pages["termine.html"] = ("Termine","Formate und Veranstaltungen der FWG Oelde.",
 pages["mitmachen.html"] = ("Mitmachen","Mitglied werden oder die FWG Oelde unterstützen.", hero("Mitmachen","Gestalten Sie Oelde mit.","Sie brauchen kein Parteibuch – nur Lust, etwas zu bewegen.")+f'''
 <section><div class="container split" style="align-items:start"><div class="reveal"><h2>Mitglied werden</h2><p>Mitglied der FWG kann werden, wer mindestens 16 Jahre alt ist und das Grundgesetz anerkennt. Über die Aufnahme entscheidet der Vorstand, ein Austritt ist jederzeit schriftlich möglich.</p>
 <div class="grid">{card("🧑‍🤝‍🧑","Mitreden","Bringen Sie Ihre Ideen in Vorstand, Fraktion und Gesprächsrunden ein.")}{card("❤️","Spenden","Unterstützen Sie unsere Arbeit: Sparkasse Münsterland Ost, <b>IBAN DE29 4005 0150 0042 6378 27</b>, BIC WELADED1MST. Für eine Zuwendungsbestätigung geben Sie bitte Ihre Anschrift im Verwendungszweck an.")}</div></div>
-<div class="card reveal"><h3>Interesse? Schreiben Sie uns.</h3><form data-demo><div class="row2"><label>Vorname<input required name="v"></label><label>Nachname<input required name="n"></label></div><label>E-Mail<input type="email" required></label><label>Ich möchte<select><option>Mitglied werden</option><option>Mehr Informationen</option><option>Spenden</option></select></label><label>Nachricht<textarea rows="4"></textarea></label><button class="btn btn-primary" type="submit">Absenden</button><div class="success">Danke! (Demo-Formular – es werden keine Daten versendet.)</div></form></div></div></section>''')
+<div class="card reveal"><h3>Interesse? Schreiben Sie uns.</h3>{contact_form("mitmachen")}</div></div></section>''')
 
 # ---------- Kontakt
 pages["kontakt.html"] = ("Kontakt","Kontakt zur FWG Oelde.", hero("Kontakt","Wir sind für Sie da.","Anregungen, Kritik oder Lob? Schreiben Sie uns.")+f'''
@@ -150,10 +167,10 @@ pages["kontakt.html"] = ("Kontakt","Kontakt zur FWG Oelde.", hero("Kontakt","Wir
 <li><div class="icon">📍</div><div><b>FWG Oelde e. V.</b><br>59302 Oelde<br><small>[Postanschrift ergänzen]</small></div></li>
 <li><div class="icon">✉️</div><div><b>E-Mail</b><br><a href="mailto:info@fwg-oelde.de">info@fwg-oelde.de</a></div></li>
 <li><div class="icon">📘</div><div><b>Facebook</b><br><a href="https://www.facebook.com/FWGOelde/">facebook.com/FWGOelde</a></div></li></ul></div>
-<div class="card reveal"><form data-demo><div class="row2"><label>Name<input required></label><label>Telefon<input type="tel"></label></div><label>E-Mail<input type="email" required></label><label>Nachricht<textarea rows="5" required></textarea></label><button class="btn btn-dark" type="submit">Senden</button><div class="success">Danke! (Demo-Formular)</div></form></div></div></section>''')
+<div class="card reveal">{contact_form("kontakt","btn-dark")}</div></div></section>''')
 
 pages["impressum.html"] = ("Impressum","Impressum der FWG Oelde.", hero("Rechtliches","Impressum","")+'<section><div class="container prose"><h2>Angaben gemäß § 5 DDG</h2><p>FWG Oelde e. V.<br>[Anschrift]<br>59302 Oelde</p><p>Vereinsregister: VR 70744, Registergericht: [ergänzen]</p><h2>Vertreten durch</h2><p>Bernhard Poppenberg, Vorsitzender</p><h2>Kontakt</h2><p>E-Mail: info@fwg-oelde.de</p><p class="note">Entwurf – bitte rechtlich prüfen und vervollständigen.</p></div></section>')
-pages["datenschutz.html"] = ("Datenschutz","Datenschutzerklärung der FWG Oelde.", hero("Rechtliches","Datenschutz","")+'<section><div class="container prose"><h2>Verantwortlicher</h2><p>FWG Oelde e. V., [Anschrift].</p><h2>Schriftarten</h2><p>Diese Seite lädt Schriftarten von Google Fonts. Für eine datenschutzfreundliche Variante sollten die Fonts lokal eingebunden werden.</p><h2>Formulare</h2><p>Die Formulare dieses Entwurfs sind Demos und übertragen keine Daten.</p><p class="note">Entwurf – vor Veröffentlichung rechtlich prüfen.</p></div></section>')
+pages["datenschutz.html"] = ("Datenschutz","Datenschutzerklärung der FWG Oelde.", hero("Rechtliches","Datenschutz","")+'<section><div class="container prose"><h2>Verantwortlicher</h2><p>FWG Oelde e. V., [Anschrift], E-Mail: info@fwg-oelde.de</p><h2>Kontaktformulare</h2><p>Wenn Sie uns über das Kontakt- oder Mitmachen-Formular schreiben, verarbeiten wir Ihren Namen, Ihre E-Mail-Adresse, optional Ihre Telefonnummer und Ihre Nachricht, um Ihre Anfrage zu beantworten (Art. 6 Abs. 1 lit. a und b DSGVO). Die Daten werden per E-Mail an uns übermittelt und nicht auf dem Webserver gespeichert. Wir löschen sie, sobald die Anfrage erledigt ist und keine gesetzlichen Aufbewahrungspflichten bestehen. Zum Schutz vor Missbrauch wird kurzzeitig eine gekürzte Prüfsumme Ihrer IP-Adresse zur Mengenbegrenzung zwischengespeichert.</p><h2>Schriftarten</h2><p>Diese Seite lädt Schriftarten von Google Fonts. Für eine datenschutzfreundliche Variante sollten die Fonts lokal eingebunden werden.</p><h2>Ihre Rechte</h2><p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Widerspruch sowie auf Beschwerde bei einer Aufsichtsbehörde.</p><p class="note">Entwurf – vor Veröffentlichung rechtlich prüfen.</p></div></section>')
 
 for fn,(t,d,b) in pages.items():
     open(fn,"w",encoding="utf-8").write(layout(fn,t,b,d))

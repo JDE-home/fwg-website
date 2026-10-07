@@ -120,3 +120,10 @@ footer .bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:2.5rem;padd
 .pill{display:inline-block;padding:.15rem .7rem;border-radius:999px;font-size:.78rem;font-weight:700}.pill.ok{background:#dff3e6;color:#17613a}.pill.no{background:#fde2e2;color:#9c2323}.pill.mid{background:#fff0d9;color:#8a5200}
 .mini-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.5rem 1.5rem;list-style:none;padding:0;margin:0}.mini-list li{padding:.4rem 0;border-bottom:1px dashed var(--line)}.mini-list small{color:var(--muted);display:block}
 .quote{font-family:var(--head);font-size:clamp(1.3rem,2.6vw,1.9rem);font-weight:600;line-height:1.35;border-left:5px solid var(--orange);padding-left:1.4rem;margin:0}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+label.check{display:flex;gap:.7rem;align-items:flex-start;font-weight:400;font-size:.88rem;color:var(--muted)}
+label.check input{width:20px;height:20px;margin-top:.15rem;flex:none;accent-color:var(--green)}label.check a{color:var(--green);font-weight:600}
+input.invalid,textarea.invalid,select.invalid{border-color:#c2312f;box-shadow:0 0 0 4px #c2312f22}
+.form-status{border-radius:14px;padding:0;font-weight:500}.form-status.ok:not(:empty),.form-status.err:not(:empty){padding:.9rem 1rem}
+.form-status.ok{background:#dff3e6;color:#17613a}.form-status.err{background:#fde2e2;color:#9c2323}
+button[disabled]{opacity:.6;cursor:wait}

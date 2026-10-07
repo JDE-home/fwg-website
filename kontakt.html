@@ -16,7 +16,13 @@
 <li><div class="icon">📍</div><div><b>FWG Oelde e. V.</b><br>59302 Oelde<br><small>[Postanschrift ergänzen]</small></div></li>
 <li><div class="icon">✉️</div><div><b>E-Mail</b><br><a href="mailto:info@fwg-oelde.de">info@fwg-oelde.de</a></div></li>
 <li><div class="icon">📘</div><div><b>Facebook</b><br><a href="https://www.facebook.com/FWGOelde/">facebook.com/FWGOelde</a></div></li></ul></div>
-<div class="card reveal"><form data-demo><div class="row2"><label>Name<input required></label><label>Telefon<input type="tel"></label></div><label>E-Mail<input type="email" required></label><label>Nachricht<textarea rows="5" required></textarea></label><button class="btn btn-dark" type="submit">Senden</button><div class="success">Danke! (Demo-Formular)</div></form></div></div></section></main>
+<div class="card reveal"><form data-contact action="api/contact.php" method="post" novalidate>
+<input type="hidden" name="form" value="kontakt"><input type="hidden" name="ts" value="">
+<div class="hp" aria-hidden="true"><label>Bitte leer lassen<input name="website" tabindex="-1" autocomplete="off"></label></div>
+<div class="row2"><label>Name<input required name="name" autocomplete="name" maxlength="120"></label><label>Telefon (optional)<input type="tel" name="phone" autocomplete="tel" maxlength="50"></label></div><label>E-Mail<input type="email" required name="email" autocomplete="email" maxlength="200"></label><label>Nachricht<textarea rows="5" required minlength="5" name="message" maxlength="5000"></textarea></label>
+<label class="check"><input type="checkbox" name="privacy" value="1" required><span>Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage verwendet werden.</span></label>
+<button class="btn btn-dark" type="submit">Absenden</button>
+<div class="form-status" role="status" aria-live="polite"></div></form></div></div></section></main>
 <footer><div class="container"><div class="cols">
 <div><a class="brand" href="index.html" style="color:#fff"><span class="logo"><img src="assets/img/logo.jpg" alt=""></span><span>FWG Oelde</span></a><p style="margin-top:1rem">Unabhängig, überparteilich, bürgernah – seit 1994 im Rat der Stadt Oelde.</p></div>
 <div><h4>Entdecken</h4><a href="ueber-uns.html">Über uns</a><a href="ratsmitglieder.html">Unser Team</a><a href="programm.html">Programm</a></div>
