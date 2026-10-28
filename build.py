@@ -31,7 +31,12 @@ def layout(fn, title, body, desc):
 <script src="assets/js/main.js"></script></body></html>'''
 
 def hero(eyebrow, h, p): return f'<div class="page-hero"><div class="container"><span class="eyebrow">{eyebrow}</span><h1>{h}</h1><p>{p}</p></div></div>'
-def person(p): return f'<article class="person reveal"><div class="ph"><img src="assets/img/team/{p["id"]}.svg" alt="Platzhalter-Porträt von {p["name"]}"><span class="tag">{p["tag"]}</span></div><div class="info"><h3>{p["name"]}</h3><div class="role">{p["role"]}</div><p>{p["bio"]}</p></div></article>'
+def contact_line(p):
+    c = []
+    if p.get("phone"): c.append(f'<a href="tel:{p["phone"].replace(" ","").replace("/","")}">📞 {p["phone"]}</a>')
+    if p.get("email"): c.append(f'<a href="mailto:{p["email"]}">✉️ {p["email"]}</a>')
+    return f'<div class="contact-line">{"".join(c)}</div>' if c else ""
+def person(p): return f'<article class="person reveal"><div class="ph"><img src="assets/img/team/{p["id"]}.svg" alt="Platzhalter-Porträt von {p["name"]}"><span class="tag">{p["tag"]}</span></div><div class="info"><h3>{p["name"]}</h3><div class="role">{p["role"]}</div><p>{p["bio"]}</p>{contact_line(p)}</div></article>'
 def band(t, s, href, label): return f'<section style="padding-top:0"><div class="container"><div class="band reveal"><div><h2>{t}</h2><p style="margin:.5rem 0 0">{s}</p></div><a class="btn btn-dark" href="{href}">{label} →</a></div></div></section>'
 def card(i,t,d,l=None): return f'<div class="card reveal"><div class="icon">{i}</div><h3>{t}</h3><p>{d}</p>{f"<a class=more href={l}>Mehr erfahren →</a>" if l else ""}</div>'
 def ul(items): return '<ul class="checks">'+"".join(f"<li>{i}</li>" for i in items)+"</ul>"
@@ -68,12 +73,17 @@ def contact_form(kind, submit_cls="btn-primary"):
 <button class="btn {submit_cls}" type="submit">Absenden</button>
 <div class="form-status" role="status" aria-live="polite"></div></form>'''
 
+VORSTAND = [dict(P[i], tag="Vorstand", role=r, bio=b) for i,r,b in [
+ ("poppenberg","1. Vorsitzender","Seit 2026 einstimmig gewählt, Nachfolger von Friedhelm Hoberg. Ratsmitglied mit Schwerpunkt Umwelt, Energie und Mobilität."),
+ ("hakenholt","Stellv. Vorsitzender","Beisitzer, jetzt stellvertretender Vorsitzender. Sachkundiger Bürger aus Lette."),
+ ("fertich","Kassierer","Verwaltet die Vereinsfinanzen. Sachkundiger Bürger für Schule, Kultur und Sport."),
+ ("soldat","Schriftführer","Führt das Protokoll des Vereins.")]]
 pages = {}
 # ---------- Start
 home_cards = "".join(card(i,t,d,f"programm.html#{k}") for k,i,t,d,_ in [topics[1],topics[2],topics[3],topics[6],topics[5],topics[0]])
-news = [("Sept. 2025","🛒","t1","FWG auf dem Wochenmarkt","Bürgergespräche über Verschuldung, Leerstand, Geiststraße und bezahlbaren Wohnraum."),
-("Aug. 2025","🏭","t2","Starker Mittelstand in Oelde","Besuch bei der SMI Service GmbH &amp; Co. KG im neuen Gebäude im Gewerbegebiet A2."),
-("Juni 2025","💻","t3","Zu Gast im Coworking-Space","In der Alten Brennerei informierte sich die FWG über flexible Arbeitsplätze.")]
+news = [("Juli 2026","🗳️","t2","Jahreshauptversammlung in Lette","Bernhard Poppenberg wird einstimmig zum neuen Vorsitzenden gewählt – Friedhelm Hoberg gibt nach knapp 17 Jahren ab."),
+("2026","🎤","t1","Haushaltsrede 2026","Fraktionsvorsitzender Thorsten Retzlaff bezieht für die FWG Stellung zum städtischen Haushalt."),
+("November 2026","📊","t3","Haushaltsberatungen","Unser Bericht über die Beratungen folgt im November.")]
 pages["index.html"] = ("Start","Die Freie Wählergemeinschaft Oelde: unabhängig, überparteilich und bürgernah – seit 1994 im Stadtrat.", f'''
 <div class="hero"><span class="blob b1"></span><span class="blob b2"></span><div class="container hero-grid">
 <div><span class="eyebrow">Freie Wählergemeinschaft · seit 1994</span>
@@ -97,7 +107,8 @@ pages["index.html"] = ("Start","Die Freie Wählergemeinschaft Oelde: unabhängig
 tl=[("09.02.1994","Gründung der FWG Oelde. Ziel: eine absolute Mehrheit einer Partei im Stadtrat verhindern."),
 ("2005","Die heutige Vereinssatzung wird beschlossen."),
 ("2011–2013","Die Zahl der Mitglieder verdreifacht sich."),
-("2017","Klausurtagung „FWG 2020“ und Start der vierteljährlichen Nachmittage der Senioren-FWG."),
+("2009","Karl-Friedrich Knop, Gründungsmitglied der FWG, wird zum Bürgermeister der Stadt Oelde gewählt und 2014 im Amt bestätigt – bis 2020."),
+("2017","Klausurtagung „FWG 2020“: Finanzen, Schule, Familie und Soziales, Bauvorhaben und Wohnungsbau im Fokus."),
 ("2019","25 Jahre FWG Oelde."),
 ("2024","30 Jahre FWG: Feier und Mitgliederehrung im Heimathaus Lette."),
 ("2025","Kommunalwahl: Die FWG behält ihre 5 Sitze im auf 50 Mitglieder gewachsenen Rat."),
@@ -106,10 +117,11 @@ pages["ueber-uns.html"] = ("Über uns","Die FWG Oelde: unabhängige Wählergemei
 <section><div class="container split"><div class="reveal prose"><span class="eyebrow">Unser Selbstverständnis</span><h2>Sachlich. Bürgernah. Unabhängig.</h2>
 <p>Unsere Entscheidungen richten sich allein nach dem Wohl der Menschen in Oelde und den Ortsteilen Lette, Stromberg und Sünninghausen.</p>
 {ul(["Kommunalpolitik ohne Bundes- oder Landespartei im Rücken","Kein Fraktionszwang","Sachkundige Bürger arbeiten in den städtischen Ausschüssen mit","Typische Politikfelder: Finanzen, Schule, Familie und Soziales, Senioren, Bauvorhaben, Wohnungsbau"])}</div>
-<div class="panel reveal"><h3>Der Vorsitzende</h3><img src="assets/img/team/poppenberg.svg" alt="Platzhalter-Porträt Bernhard Poppenberg" style="width:150px;border-radius:22px;margin:0 0 1rem;border:4px solid rgba(255,255,255,.8)"><p><b>Bernhard Poppenberg</b> führt die FWG seit der Mitgliederversammlung 2026 – gewählt einstimmig.</p></div></div></section>
+<div class="panel reveal"><h3>Gründungsmitglied &amp; Altbürgermeister</h3><img src="assets/img/team/knopkf.svg" alt="Platzhalter-Porträt Karl-Friedrich Knop" style="width:150px;border-radius:22px;margin:0 0 1rem;border:4px solid rgba(255,255,255,.8)"><p><b>Karl-Friedrich Knop</b> gehört zu den Gründern der FWG Oelde und war von 2009 bis 2020 Bürgermeister der Stadt Oelde.</p></div></div></section>
 <section class="alt"><div class="container"><div class="section-head reveal"><span class="eyebrow">Meilensteine</span><h2>Unsere Geschichte.</h2></div><div class="timeline">{"".join(f'<div class="item reveal"><b>{y}</b><p>{t}</p></div>' for y,t in tl)}</div></div></section>
-<section><div class="container"><div class="section-head reveal"><span class="eyebrow">Vorstand</span><h2>Wer den Verein trägt.</h2></div>
-<div class="card reveal"><ul class="mini-list"><li>Bernhard Poppenberg<small>Vorsitzender</small></li><li>Achim Hakenholt<small>Stellv. Vorsitzender</small></li><li>Alexander Fertich<small>Kassierer</small></li><li>Wolf-Rüdiger Soldat<small>Schriftführer</small></li><li>Hubert Bleß<small>Beisitzer</small></li><li>Harald Herklotz<small>Beisitzer</small></li><li>Friedhelm Hoberg<small>Beisitzer</small></li><li>Ludger Lücke<small>Beisitzer</small></li><li>Thomas Populoh<small>Beisitzer</small></li><li>Thorsten Retzlaff<small>Beisitzer</small></li><li>Manuela Steuer<small>Beisitzerin</small></li></ul></div>
+<section><div class="container"><div class="section-head reveal"><span class="eyebrow">Vorstand</span><h2>Wer den Verein führt.</h2><p class="lead">Der engere Vorstand der FWG Oelde e. V. – gewählt auf der Mitgliederversammlung 2026 in Lette.</p></div>
+<div class="team">{"".join(person(v) for v in VORSTAND)}</div>
+<div class="card reveal" style="margin-top:1.6rem"><h3>Weitere Vorstandsmitglieder (Beisitzer)</h3><ul class="mini-list"><li>Hubert Bleß</li><li>Harald Herklotz</li><li>Friedhelm Hoberg</li><li>Ludger Lücke</li><li>Thomas Populoh</li><li>Thorsten Retzlaff</li><li>Manuela Steuer</li></ul></div>
 <div class="grid g2" style="margin-top:1.4rem">{card("📜","Satzung in Kürze","Eingetragener Verein (VR 70744). Zweck ist die Teilnahme an Kommunal- und Kreistagswahlen mit eigenen Wahlvorschlägen. Mitglied wird, wer mindestens 16 Jahre alt ist und das Grundgesetz anerkennt. Der Vorstand wird für zwei Jahre ehrenamtlich gewählt.")}{card("🏛️","Auch im Kreistag","Dorothea Nienkemper ist Fraktionsvorsitzende der FWG im Kreistag Warendorf.")}</div></div></section>
 {band("Lernen Sie uns kennen.","Persönlich, am Infostand oder bei einem unserer Formate.","termine.html","Treffen &amp; Formate")}''')
 
@@ -137,20 +149,14 @@ pages["programm.html"] = ("Programm","Das Wahlprogramm 2025 der FWG Oelde: Gemei
 {band("Ihre Idee fehlt?","Sagen Sie uns, was Oelde braucht – wir nehmen es mit in den Rat.","kontakt.html","Kontakt aufnehmen")}''')
 
 # ---------- Aktuelles
-posts=[("Sept. 2025","🛒","t1","FWG auf dem Wochenmarkt","Bürgergespräche über Verschuldung, Wasserspender statt Wasserläufe, Hochbeete, Leerstand, den Zustand der Geiststraße, bezahlbaren Wohnraum, Sprechstunden im Rathaus und die Übertragung der Sitzungen."),
-("Aug. 2025","🏭","t2","Starker Mittelstand in Oelde","Besuch bei der SMI Service GmbH &amp; Co. KG (Tür- und Fensterautomatik, rund 40 Beschäftigte) im Neubau im Gewerbegebiet A2."),
-("Juni 2025","💻","t3","Coworking in der Alten Brennerei","500 qm Coworking-Space seit März 2025 – die FWG informiert sich über neue Arbeitsmodelle."),
-("2025","🧱","t1","Antrag: Sporthalle Sünninghausen","Die seit 2015 zugesagte Sanierung der Sanitärbereiche kommt: Der FWG-Antrag auf vorgezogene Sanierung fand 2025 eine Mehrheit."),
-("Sept. 2024","🎉","t2","30 Jahre FWG Oelde","Feier und Mitgliederehrung im Heimathaus Lette."),
-("Dez. 2023","⚡","t3","Besuch bei den Stadtwerken Ostmünsterland","Einblick in das neue Verwaltungsgebäude im Gewerbegebiet A2."),
-("2017–2019","👵","t1","Die Senioren-FWG","Vierteljährliche Nachmittage im Bürgerhaus mit Information, Musik und Begegnung – die Besucherzahl stieg von 65 auf über 100."),
-("2020","🧒","t2","Beweg was!","Schülerinnen und Schüler begleiten die Fraktion, eine Schüler-Ratssitzung schafft Beteiligung."),
-("2019","🗳️","t3","Versöhnen statt Spalten","Zum Bürgerentscheid über den Marktplatzumbau stimmte die FWG dem Bürgerbegehren zu.")]
-pages["aktuelles.html"] = ("Aktuelles","Neuigkeiten, Besuche und Positionen der FWG Oelde.", hero("Aktuelles","Neuigkeiten aus Oelde.","Berichte, Besuche und Positionen der FWG – eine Auswahl aus unserem Archiv.")+f'''
-<section><div class="container"><div class="grid g3">{"".join(f'<article class="card news reveal"><div class="thumb {c}">{e}</div><span class="meta">{d}</span><h3>{t}</h3><p>{x}</p></article>' for d,e,c,t,x in posts)}</div></div></section>''')
+posts=[("November 2026","📊","t3","Bericht: Haushaltsberatungen","Wir berichten über die Haushaltsberatungen im Rat – der Bericht folgt im November.","Folgt"),
+("2026","🎤","t1","Haushaltsrede von Thorsten Retzlaff","Der Fraktionsvorsitzende der FWG bezieht Stellung zum Haushalt 2026. Die Rede im Wortlaut wird hier veröffentlicht. Hintergrund: Die Rücklagen der Stadt sind fast aufgebraucht, für 2026 ist keine Neuverschuldung geplant, der erwartete Fehlbetrag soll aus den Rücklagen gedeckt werden.","Rede"),
+("Juli 2026","🗳️","t2","Jahreshauptversammlung in Lette","Bei der ordentlichen Mitgliederversammlung im Sportlerheim Lette wählte die FWG Bernhard Poppenberg einstimmig zum neuen 1. Vorsitzenden. Er folgt auf Friedhelm Hoberg, der nach knapp 17 Jahren an der Spitze nicht erneut antrat. Neuer stellvertretender Vorsitzender ist Achim Hakenholt, Kassierer Alexander Fertich, Schriftführer Wolf-Rüdiger Soldat.","Bericht")]
+pages["aktuelles.html"] = ("Aktuelles","Neuigkeiten, Besuche und Positionen der FWG Oelde.", hero("Aktuelles 2026","Neuigkeiten aus Oelde.","Berichte und Positionen der FWG aus dem laufenden Jahr.")+f'''
+<section><div class="container"><div class="grid g3">{"".join(f'<article class="card news reveal"><div class="thumb {c}">{e}</div><span class="meta">{d} · <b>{k}</b></span><h3>{t}</h3><p>{x}</p></article>' for d,e,c,t,x,k in posts)}</div></div></section>''')
 
 # ---------- Termine
-fm=[("🗣️","Bürgersprechstunden","Ratsmitglieder vor Ort in den Ortsteilen – sprechen Sie uns an."),("🛒","Infostand Wochenmarkt","Kommen Sie ins Gespräch, wir hören zu."),("👥","Senioren-FWG","Vierteljährliche Nachmittage im Bürgerhaus."),("🏢","Betriebsbesuche","Wir informieren uns vor Ort bei Unternehmen und Einrichtungen."),("📋","Mitgliederversammlung","Mindestens einmal im Jahr, Einladung mit zwei Wochen Frist."),("💶","Veranstaltung zu den Stadtfinanzen","Eine öffentliche Veranstaltung ist für den Herbst geplant.")]
+fm=[("🗣️","Bürgersprechstunden","Ratsmitglieder vor Ort in den Ortsteilen – sprechen Sie uns an."),("🛒","Infostand Wochenmarkt","Kommen Sie ins Gespräch, wir hören zu."),("📊","Haushaltsberatungen","Im November berät der Rat den Haushalt – wir berichten."),("🏢","Betriebsbesuche","Wir informieren uns vor Ort bei Unternehmen und Einrichtungen."),("📋","Mitgliederversammlung","Mindestens einmal im Jahr, Einladung mit zwei Wochen Frist."),("💶","Veranstaltung zu den Stadtfinanzen","Eine öffentliche Veranstaltung ist für den Herbst geplant.")]
 pages["termine.html"] = ("Termine","Formate und Veranstaltungen der FWG Oelde.", hero("Termine","Treffen Sie uns.","Aktuell sind keine festen Termine veröffentlicht. So finden Sie den Kontakt zu uns:")+f'''
 <section><div class="container"><div class="grid g3">{"".join(card(i,t,d) for i,t,d in fm)}</div><p class="note">Konkrete Termine werden hier ergänzt, sobald sie feststehen. Fragen Sie gern über das <a href="kontakt.html">Kontaktformular</a> nach.</p></div></section>
 {band("Nichts verpassen.","Schreiben Sie uns, wir halten Sie auf dem Laufenden.","kontakt.html","Kontakt")}''')

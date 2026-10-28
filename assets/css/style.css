@@ -127,3 +127,5 @@ input.invalid,textarea.invalid,select.invalid{border-color:#c2312f;box-shadow:0 
 .form-status{border-radius:14px;padding:0;font-weight:500}.form-status.ok:not(:empty),.form-status.err:not(:empty){padding:.9rem 1rem}
 .form-status.ok{background:#dff3e6;color:#17613a}.form-status.err{background:#fde2e2;color:#9c2323}
 button[disabled]{opacity:.6;cursor:wait}
+.contact-line{display:flex;flex-direction:column;gap:.2rem;margin-top:.7rem;font-size:.88rem}.contact-line a{color:var(--green);font-weight:600;text-decoration:none}.contact-line a:hover{text-decoration:underline}
+.meta b{color:var(--orange-d)}
