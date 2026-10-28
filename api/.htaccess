@@ -1,0 +1,4 @@
+# config.php darf nicht direkt aufgerufen werden
+<Files "config.php">
+  Require all denied
+</Files>

@@ -12,7 +12,9 @@
    "short",
    true,
    false
-  ]
+  ],
+  "phone": "",
+  "email": ""
  },
  {
   "id": "knop",
@@ -27,7 +29,9 @@
    "short",
    false,
    false
-  ]
+  ],
+  "phone": "",
+  "email": ""
  },
  {
   "id": "populoh",
@@ -42,7 +46,9 @@
    "bald",
    false,
    false
-  ]
+  ],
+  "phone": "",
+  "email": ""
  },
  {
   "id": "poppenberg",
@@ -57,7 +63,9 @@
    "short",
    true,
    true
-  ]
+  ],
+  "phone": "",
+  "email": ""
  },
  {
   "id": "steuer",
@@ -72,7 +80,9 @@
    "bob",
    false,
    false
-  ]
+  ],
+  "phone": "",
+  "email": ""
  },
  {
   "id": "bless",
@@ -87,7 +97,9 @@
    "short",
    false,
    false
-  ]
+  ],
+  "phone": "",
+  "email": ""
  },
  {
   "id": "fibbe",
@@ -102,7 +114,9 @@
    "curly",
    false,
    false
-  ]
+  ],
+  "phone": "",
+  "email": ""
  },
  {
   "id": "hoberg",
@@ -117,7 +131,9 @@
    "bald",
    true,
    false
-  ]
+  ],
+  "phone": "",
+  "email": ""
  },
  {
   "id": "aschulz",
@@ -132,7 +148,9 @@
    "long",
    false,
    false
-  ]
+  ],
+  "phone": "",
+  "email": ""
  },
  {
   "id": "rdesel",
@@ -147,7 +165,9 @@
    "short",
    false,
    false
-  ]
+  ],
+  "phone": "",
+  "email": ""
  },
  {
   "id": "hakenholt",
@@ -162,7 +182,9 @@
    "short",
    true,
    false
-  ]
+  ],
+  "phone": "",
+  "email": ""
  },
  {
   "id": "kemper",
@@ -177,7 +199,9 @@
    "curly",
    false,
    false
-  ]
+  ],
+  "phone": "",
+  "email": ""
  },
  {
   "id": "schestak",
@@ -192,7 +216,9 @@
    "bob",
    false,
    false
-  ]
+  ],
+  "phone": "",
+  "email": ""
  },
  {
   "id": "specken",
@@ -207,7 +233,9 @@
    "short",
    false,
    true
-  ]
+  ],
+  "phone": "",
+  "email": ""
  },
  {
   "id": "fertich",
@@ -222,7 +250,9 @@
    "short",
    false,
    false
-  ]
+  ],
+  "phone": "",
+  "email": ""
  },
  {
   "id": "haensel",
@@ -237,7 +267,9 @@
    "long",
    false,
    false
-  ]
+  ],
+  "phone": "",
+  "email": ""
  },
  {
   "id": "pickenaecker",
@@ -252,7 +284,9 @@
    "bald",
    true,
    false
-  ]
+  ],
+  "phone": "",
+  "email": ""
  },
  {
   "id": "sumkoetter",
@@ -267,6 +301,42 @@
    "short",
    false,
    false
-  ]
+  ],
+  "phone": "",
+  "email": ""
+ },
+ {
+  "id": "soldat",
+  "name": "Wolf-Rüdiger Soldat",
+  "role": "Schriftführer",
+  "tag": "Vorstand",
+  "bio": "Führt das Protokoll des Vereins.",
+  "look": [
+   "#d6a07a",
+   "#9a9a9a",
+   "#1f3a73",
+   "short",
+   true,
+   false
+  ],
+  "phone": "",
+  "email": ""
+ },
+ {
+  "id": "knopkf",
+  "name": "Karl-Friedrich Knop",
+  "role": "Gründungsmitglied · Bürgermeister 2009–2020",
+  "tag": "Gründer",
+  "bio": "Initiator der FWG Oelde und von 2009 bis 2020 Bürgermeister der Stadt Oelde.",
+  "look": [
+   "#efc4a0",
+   "#d8d8d8",
+   "#122450",
+   "short",
+   false,
+   false
+  ],
+  "phone": "",
+  "email": ""
  }
 ]
