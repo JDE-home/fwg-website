@@ -82,7 +82,7 @@ pages = {}
 # ---------- Start
 home_cards = "".join(card(i,t,d,f"programm.html#{k}") for k,i,t,d,_ in [topics[1],topics[2],topics[3],topics[6],topics[5],topics[0]])
 news = [("Juli 2026","🗳️","t2","Jahreshauptversammlung in Lette","Bernhard Poppenberg wird einstimmig zum neuen Vorsitzenden gewählt – Friedhelm Hoberg gibt nach knapp 17 Jahren ab."),
-("2026","🎤","t1","Haushaltsrede 2026","Fraktionsvorsitzender Thorsten Retzlaff bezieht für die FWG Stellung zum städtischen Haushalt."),
+("Haushalt 2026","🎤","t1","Letzte Haushaltsrede","Unser Fraktionsvorsitzender Thorsten Retzlaff hat für die FWG zum städtischen Haushalt Stellung genommen."),
 ("November 2026","📊","t3","Haushaltsberatungen","Unser Bericht über die Beratungen folgt im November.")]
 pages["index.html"] = ("Start","Die Freie Wählergemeinschaft Oelde: unabhängig, überparteilich und bürgernah – seit 1994 im Stadtrat.", f'''
 <div class="hero"><span class="blob b1"></span><span class="blob b2"></span><div class="container hero-grid">
@@ -96,7 +96,7 @@ pages["index.html"] = ("Start","Die Freie Wählergemeinschaft Oelde: unabhängig
 <div class="stat"><b>1994</b><span>gegründet</span></div><div class="stat"><b data-count="5">0</b><span>Sitze im Stadtrat</span></div><div class="stat"><b data-count="4">0</b><span>Stadtteile im Blick</span></div><div class="stat"><b>0</b><span>Fraktionszwang</span></div></div></div>
 <section><div class="container"><div class="section-head reveal"><span class="eyebrow">Wofür wir stehen</span><h2>Politik, die bei den Menschen ankommt.</h2><p class="lead">Die Schwerpunkte aus unserem Wahlprogramm 2025.</p></div>
 <div class="grid g3">{home_cards}</div></div></section>
-<section class="alt"><div class="container"><blockquote class="quote reveal">Oelde hat kein Einnahmenproblem, sondern ein Ausgabenproblem. Darum setzen wir Prioritäten statt „Wünsch dir was“.</blockquote></div></section>
+<section class="alt"><div class="container"><figure class="quote-fig reveal"><blockquote class="quote">„Die FWG Oelde steht schon immer für den sparsamen Umgang mit Steuergeldern. Dies ist auch eine Frage der Generationengerechtigkeit. Größtmögliche Transparenz bei politischen Entscheidungen und Bürgernähe tragen dazu bei, dass der Bürger sich ernst genommen fühlt.“</blockquote><figcaption>FWG Oelde</figcaption></figure></div></section>
 <section><div class="container"><div class="split"><div class="reveal"><span class="eyebrow">Unser Team</span><h2>Gesichter, die Sie kennen.</h2><p class="lead">Fünf Ratsmitglieder und viele sachkundige Bürgerinnen und Bürger aus allen Ortsteilen – Nachbarn, Unternehmer, Eltern, Vereinsmenschen.</p><a class="btn btn-dark" href="ratsmitglieder.html">Alle ansehen →</a></div>
 <div class="grid" style="grid-template-columns:repeat(2,1fr)">{person(P["retzlaff"])}{person(P["knop"])}</div></div></div></section>
 <section class="alt"><div class="container"><div class="section-head reveal"><span class="eyebrow">Aktuelles</span><h2>Was uns gerade bewegt.</h2></div><div class="grid g3">
@@ -150,7 +150,7 @@ pages["programm.html"] = ("Programm","Das Wahlprogramm 2025 der FWG Oelde: Gemei
 
 # ---------- Aktuelles
 posts=[("November 2026","📊","t3","Bericht: Haushaltsberatungen","Wir berichten über die Haushaltsberatungen im Rat – der Bericht folgt im November.","Folgt"),
-("2026","🎤","t1","Haushaltsrede von Thorsten Retzlaff","Der Fraktionsvorsitzende der FWG bezieht Stellung zum Haushalt 2026. Die Rede im Wortlaut wird hier veröffentlicht. Hintergrund: Die Rücklagen der Stadt sind fast aufgebraucht, für 2026 ist keine Neuverschuldung geplant, der erwartete Fehlbetrag soll aus den Rücklagen gedeckt werden.","Rede"),
+("Haushalt 2026","🎤","t1","Haushaltsrede von Thorsten Retzlaff","Die letzte Haushaltsrede unseres Fraktionsvorsitzenden Thorsten Retzlaff. Der Rat verabschiedete den Etat 2026 mit den Stimmen von CDU, FWG, FDP, Volt und Linken. Die Rede im Wortlaut wird hier veröffentlicht.","Rede"),
 ("Juli 2026","🗳️","t2","Jahreshauptversammlung in Lette","Bei der ordentlichen Mitgliederversammlung im Sportlerheim Lette wählte die FWG Bernhard Poppenberg einstimmig zum neuen 1. Vorsitzenden. Er folgt auf Friedhelm Hoberg, der nach knapp 17 Jahren an der Spitze nicht erneut antrat. Neuer stellvertretender Vorsitzender ist Achim Hakenholt, Kassierer Alexander Fertich, Schriftführer Wolf-Rüdiger Soldat.","Bericht")]
 pages["aktuelles.html"] = ("Aktuelles","Neuigkeiten, Besuche und Positionen der FWG Oelde.", hero("Aktuelles 2026","Neuigkeiten aus Oelde.","Berichte und Positionen der FWG aus dem laufenden Jahr.")+f'''
 <section><div class="container"><div class="grid g3">{"".join(f'<article class="card news reveal"><div class="thumb {c}">{e}</div><span class="meta">{d} · <b>{k}</b></span><h3>{t}</h3><p>{x}</p></article>' for d,e,c,t,x,k in posts)}</div></div></section>''')
