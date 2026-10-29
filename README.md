@@ -16,3 +16,13 @@ Die Formulare auf `kontakt.html` und `mitmachen.html` senden per `fetch` an `api
 - Schutz: Honeypot-Feld, Mindestzeit, Rate-Limit pro IP (nur gehasht im Temp-Verzeichnis), Herkunftsprüfung, Schutz vor Header-Injection, Datenschutz-Checkbox. Es werden keine Nachrichten gespeichert.
 - Lokal testen: `php -S 127.0.0.1:8001` im Projektordner (für echten Mailversand muss `sendmail_path` konfiguriert sein).
 - Datenschutzerklärung und Impressum sind Entwürfe und müssen rechtlich geprüft werden.
+
+## Passwortschutz (Vercel)
+
+`middleware.js` schützt die gesamte Seite per HTTP-Basic-Auth (Browser-Passwortabfrage).
+
+1. In Vercel: **Project → Settings → Environment Variables** → Variable `SITE_PASSWORD` mit dem gewünschten Passwort anlegen (für Production und ggf. Preview).
+2. Neu deployen (Variablen gelten erst für neue Deployments).
+3. Beim Aufruf fragt der Browser nach Benutzername und Passwort. Der **Benutzername ist beliebig**, nur das Passwort wird geprüft.
+
+Ist `SITE_PASSWORD` nicht gesetzt, antwortet die Seite mit 503 und bleibt gesperrt. Zum Livegang die Middleware entfernen (Datei `middleware.js` löschen). `.vercelignore` schließt Build-Werkzeuge, `people.json`, README und das PHP-Formular vom Deployment aus; das PHP-Kontaktformular läuft auf Vercel nicht.

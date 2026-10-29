@@ -1,0 +1,6 @@
+# Nicht auf Vercel ausliefern: Build-Werkzeuge, Rohdaten, PHP-Formular (läuft auf Vercel nicht)
+build.py
+tools_avatars.py
+people.json
+README.md
+api/
