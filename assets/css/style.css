@@ -129,7 +129,5 @@ input.invalid,textarea.invalid,select.invalid{border-color:#c2312f;box-shadow:0 
 button[disabled]{opacity:.6;cursor:wait}
 .contact-line{display:flex;flex-direction:column;gap:.2rem;margin-top:.7rem;font-size:.88rem}.contact-line a{color:var(--green);font-weight:600;text-decoration:none}.contact-line a:hover{text-decoration:underline}
 .meta b{color:var(--orange-d)}
-.quote-fig{margin:0 auto;max-width:900px;text-align:center;position:relative;padding-top:4.6rem}
-.quote-fig:before{content:"\201C";position:absolute;top:0;left:50%;transform:translateX(-50%);font-family:Georgia,serif;font-weight:700;font-size:7rem;line-height:1;height:4rem;overflow:hidden;color:var(--orange)}
-.quote-fig .quote{border:0;padding:0;font-size:clamp(1.25rem,2.6vw,1.8rem)}
-.quote-fig figcaption{margin-top:1.2rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.85rem;color:var(--orange-d)}
+.panel-quote{margin:1.4rem 0 0;padding:1.2rem 0 0;border-top:1px solid rgba(255,255,255,.3);font-family:var(--head);font-weight:500;font-size:1.05rem;line-height:1.5;position:relative}
+.panel-quote cite{display:block;margin-top:.8rem;font-style:normal;font-family:var(--font);font-weight:700;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)}
