@@ -137,6 +137,13 @@ prog2020_html = f'''<section class="alt" id="programm2020"><div class="container
 <p class="note">Zusammengestellt aus den veröffentlichten Programmtexten und Haushaltsreden der FWG. „Leben und Wohnen im Alter“ und „Städtepartnerschaft“ sind nur als Überschrift bekannt. Bitte mit dem Wahlprogramm-Flyer von 2020 abgleichen.</p>
 </div></section>'''
 
+wk_posts = [
+ ("16. Juli 2025","🙋","t2","Wir sind bereit – und freuen uns auf den Austausch!","Unser Team steht in den Startlöchern. Die Kandidatinnen und Kandidaten für alle Wahlbezirke stehen fest.","Wahlkampf","wahlkampf-wir-sind-bereit.html"),
+ ("2. August 2025","🏭","t1","Besuch bei SMI: starker Mittelstand in Oelde","Die FWG besucht die SMI Service GmbH &amp; Co. KG im Gewerbegebiet A2 und informiert sich über Fachkräfte, Digitalisierung und Nachhaltigkeit.","Wahlkampf","wahlkampf-smi.html"),
+ ("24. August 2025","🛒","t3","FWG im Dialog auf dem Wochenmarkt","Gespräche über Verschuldung, Wasserspender statt Wasserläufe, Hochbeete, Leerstand, Geiststraße und bezahlbaren Wohnraum.","Wahlkampf","wahlkampf-wochenmarkt.html"),
+ ("27. August 2025","🗳️","t2","Wahlaufruf: Gehen Sie wählen!","Der Aufruf der FWG zur Beteiligung an der Kommunalwahl am 14. September 2025.","Wahlaufruf","wahlkampf-wahlaufruf.html"),
+]
+
 pages = {}
 # ---------- Start
 home_cards = "".join(card(i,t,d,f"programm.html#{k}") for k,i,t,d,_ in [topics[1],topics[2],topics[3],topics[6],topics[5],topics[0]])
@@ -214,7 +221,8 @@ posts=[("November 2026","📊","t3","Bericht: Haushaltsberatungen","Wir berichte
 ("Haushalt 2026","🎤","t1","Haushaltsrede von Thorsten Retzlaff","Die letzte Haushaltsrede unseres Fraktionsvorsitzenden Thorsten Retzlaff. Der Rat verabschiedete den Etat 2026 mit den Stimmen von CDU, FWG, FDP, Volt und Linken. Die Rede im Wortlaut wird hier veröffentlicht.","Rede",""),
 ("Juli 2026","🗳️","t2","FWG wählt Bernhard Poppenberg zum neuen Vorsitzenden","Nach fast 17 Jahren gibt Friedhelm Hoberg den Vorsitz ab. Bei der Mitgliederversammlung im Sportlerheim Lette wurde Bernhard Poppenberg einstimmig zum Nachfolger gewählt. Dazu Berichte aus Kreistag und Rat und große Sorgen um die Stadtfinanzen.","Bericht","jahreshauptversammlung-2026.html")]
 pages["aktuelles.html"] = ("Aktuelles","Neuigkeiten, Besuche und Positionen der FWG Oelde.", hero("Aktuelles 2026","Neuigkeiten aus Oelde.","Berichte und Positionen der FWG aus dem laufenden Jahr.")+f'''
-<section><div class="container"><div class="grid g3">{"".join(post_card(*p) for p in posts)}</div></div></section>''')
+<section><div class="container"><div class="grid g3">{"".join(post_card(*p) for p in posts)}</div></div></section>
+<section class="alt" id="wahlkampf2025"><div class="container"><div class="section-head reveal"><span class="eyebrow">Rückblick</span><h2>Wahlkampf 2025</h2><p class="lead">Aktionen und Beiträge zur Kommunalwahl am 14. September 2025.</p></div><div class="grid g3">{"".join(post_card(*p) for p in wk_posts)}</div></div></section>''')
 
 # ---------- Artikel: Jahreshauptversammlung 2026
 pages["jahreshauptversammlung-2026.html"] = ("Neuer Vorsitzender","FWG wählt Bernhard Poppenberg zum neuen Vorsitzenden: Bericht von der Mitgliederversammlung in Lette.", hero("Aktuelles · Juli 2026","FWG wählt Bernhard Poppenberg zum neuen Vorsitzenden","Mitgliederversammlung im Sportlerheim Lette: Friedhelm Hoberg gibt nach fast 17 Jahren den Vorsitz ab.")+f'''
@@ -270,6 +278,36 @@ pages["kandidaten-2025.html"] = ("Kandidaten 2025","Rückblick: Die Kandidatinne
 <p class="note cand-empty" hidden>Zu diesem Thema gibt es keine Kandidaturen.</p>
 <p class="note">Rückblick auf die Kandidaturen zur Kommunalwahl am {CAND["wahltag"]}. Die Aussagen geben den Stand zum Wahlkampf wieder.</p>
 </div></section>''')
+
+# ---------- Wahlkampf 2025: Beiträge von der bisherigen Website
+def article(fn, title, desc, eyebrow, h1, lead, body):
+    pages[fn] = (title, desc, hero(eyebrow, h1, lead)+f'''<section><div class="container article"><div class="prose">{body}<p style="margin-top:1.5rem"><a class="btn btn-dark" href="aktuelles.html#wahlkampf2025">← Zurück zum Rückblick</a></p></div></div></section>''')
+
+article("wahlkampf-wir-sind-bereit.html","Wir sind bereit","Unser Team steht in den Startlöchern für den Wahlkampf in Oelde.","Wahlkampf 2025 · 16. Juli 2025","Wir sind bereit – und freuen uns auf den Austausch!","Unser Team steht in den Startlöchern für den Wahlkampf in Oelde.",
+ '''<p>In den kommenden Wochen wollen wir mit Ihnen ins Gespräch kommen, zuhören, diskutieren und gemeinsam herausfinden, was Oelde bewegt.</p>
+<h2>Unsere Kandidaten</h2><p>Unsere Kandidatinnen und Kandidaten für Oelde stehen fest! In allen Wahlbezirken sind wir mit engagierten Menschen vertreten, die sich mit Herz und Verstand für unsere Stadt einsetzen wollen. In den nächsten Wochen stellen wir hier unser Team und ihre Themen genauer vor.</p>''')
+
+article("wahlkampf-smi.html","Besuch bei SMI","Die FWG Oelde besucht die Firma SMI im Gewerbegebiet A2: starker Mittelstand in Oelde.","Wahlkampf 2025 · 2. August 2025","FWG zu Besuch bei SMI – starker Mittelstand in Oelde","Im Rahmen der regelmäßigen Unternehmensbesuche war die FWG bei SMI (Service, Montage, Inbetriebnahme) im Gewerbegebiet A2.",
+ '''<p>Der Austausch mit lokalen Betrieben ist der FWG ein wichtiges Anliegen, um sich über aktuelle Entwicklungen und Herausforderungen vor Ort zu informieren und den Wirtschaftsstandort Oelde zu stärken.</p>
+<p>Nadine Schneider, Geschäftsführer Benedikt Wallschlag und Prokuristin Maike Hiegemann gaben der FWG einen umfassenden Einblick in die Abläufe des Unternehmens. Die 1999 gegründete Firma bezog 2024 ihren modernen Neubau im Gewerbegebiet A2.</p>
+<p>Im Mittelpunkt des Betriebs stehen innovative Lösungen rund um Tür- und Fensterautomatik, Rauchabzug, Fluchtwegsicherung und Zutrittskontrolle. Bei der Planung des neuen Standorts legte Firmengründer Ulrich Schneider besonderen Wert auf digitalisierte und effiziente Prozesse. Die Gäste der FWG zeigten sich beeindruckt von den lichtdurchfluteten, nahezu papierlos organisierten Büros sowie der technisch modernen Fertigung mit CNC-gesteuerten Maschinen.</p>
+<p>Aktuell sind rund 40 Mitarbeiterinnen und Mitarbeiter bei SMI beschäftigt. Die Geschäftsführung legt großen Wert auf ein gutes, familiäres Betriebsklima, das als wichtige Grundlage für Mitarbeiterzufriedenheit und langfristige Bindung gesehen wird. Denn auch die Gewinnung und Entwicklung von Fachkräften ist ein zentrales Thema bei SMI. Man setzt im technischen Bereich auf kontinuierliche Schulungen und Zertifizierungen. Nachhaltigkeit wird im Unternehmen ebenfalls großgeschrieben: Eine Solaranlage versorgt das Gebäude mit Strom für Heizung und Kühlung und schafft ein angenehmes Raumklima.</p>
+<p>Die Geschäftsführung lobte die gute Unterstützung durch Rat und Verwaltung beim Umzug an den neuen Standort. Die FWG Oelde zeigte sich beeindruckt von der professionellen Aufstellung des Unternehmens und wünschte SMI weiterhin viel Erfolg.</p>
+<div class="card reveal"><h3>Beim Besuch dabei</h3><p style="margin:0">Für die FWG: Thorsten Retzlaff, Bernhard Poppenberg, Thomas Populoh, Achim Hakenholt, Hubert Bleß, Manuela Steuer, Andreas Sumkötter, Ludger Lücke und Alexander Fertich. Für die SMI Service GmbH &amp; Co. KG: Benedikt Wallschlag, Maike Hiegemann und Nadine Schneider.</p></div>''')
+
+article("wahlkampf-wochenmarkt.html","FWG im Dialog auf dem Wochenmarkt","Die FWG im Gespräch mit den Bürgerinnen und Bürgern auf dem Oelder Wochenmarkt.","Wahlkampf 2025 · 24. August 2025","FWG im Dialog auf dem Wochenmarkt","Vertreterinnen und Vertreter der FWG waren auf dem Oelder Wochenmarkt präsent, um mit den Bürgerinnen und Bürgern ins Gespräch zu kommen.",
+ '''<p>Ziel der Aktion war der direkte Austausch über Themen, die die Menschen in Oelde bewegen, sowohl im Hinblick auf das, was bereits gut läuft, als auch auf Bereiche mit Verbesserungsbedarf.</p>
+<p>Ein zentrales Thema war die hohe Verschuldung der Stadt. Viele Marktbesucher äußerten Sorgen über die langfristige finanzielle Entwicklung Oeldes. Die FWG stellte in diesem Zusammenhang eigene Vorschläge vor, wie die Schuldenspirale durchbrochen werden könnte, unter anderem durch sparsame, aber kreative Lösungen in der Stadtgestaltung. So sprach man sich beispielsweise für den Einsatz von Wasserspendern als nützliche Gestaltungselemente im Stadtbild aus, anstelle teurer künstlicher Wasserläufe.</p>
+<p>Auch der Erhalt der Hochbeete in der Fußgängerzone wurde thematisiert. Diese tragen aus Sicht der FWG nicht nur zur Aufenthaltsqualität bei, sondern fördern auch das Stadtgrün und das Klima in der Innenstadt. Schlecht für die Innenstadt ist der Leerstand von Immobilien, vor allem wenn sie zentral gelegen sind und verfallen. Kritisch wurde auch der schlechte Zustand der Geiststraße (vor Rossmann) gesehen, die für Auto und Radfahrer bereits seit langem schwer zu befahren ist.</p>
+<p>Ein weiteres wichtiges Anliegen war bezahlbarer Wohnraum. Die Gesprächspartner waren sich einig, dass hier dringend Handlungsbedarf besteht. Das Thema Bürgernähe kam ebenfalls zur Sprache. Sprechstunden im Rathaus für alle Bürgergruppen, ein FWG-Anliegen, fanden viele gut; die Forderung nach digitaler Übertragung der Rats- und Ausschusssitzungen fand ebenfalls Zustimmung. Neben diesen Schwerpunktthemen wurden viele weitere Fragen und Ideen offen und engagiert diskutiert.</p>
+<p>Die FWG zeigte sich erfreut über das große Interesse und die konstruktiven Gespräche. Der direkte Kontakt mit den Menschen vor Ort bleibt für sie ein zentraler Bestandteil ihrer politischen Arbeit.</p>
+<p><b>Weitere Gesprächsangebote</b> auf dem Wochenmarkt in Oelde, in den Ortsteilen und am Telefon folgen.</p>''')
+
+article("wahlkampf-wahlaufruf.html","Wahlaufruf","Die FWG Oelde bittet alle Bürgerinnen und Bürger, an der Kommunalwahl am 14. September teilzunehmen.","Wahlkampf 2025 · 27. August 2025","Engagement in Oelde: Gehen Sie wählen!","Die FWG Oelde bittet alle Bürgerinnen und Bürger der Stadt, an der Kommunalwahl am 14. September teilzunehmen. Demokratie braucht Engagement!",
+ '''<p>Nehmen Sie Ihr Recht auf Beteiligung wahr und gehen Sie bitte wählen.</p>
+<p class="quote" style="margin:1.5rem 0">Gehen Sie wählen, denn es ist Ihre Stadt.</p>
+<p>Unser Programm zur Wahl finden Sie unter <a href="programm.html">Programm</a>.</p>''')
+
 
 # ---------- Termine
 fm=[("🗣️","Bürgersprechstunden","Ratsmitglieder vor Ort in den Ortsteilen – sprechen Sie uns an."),("🛒","Infostand Wochenmarkt","Kommen Sie ins Gespräch, wir hören zu."),("📊","Haushaltsberatungen","Im November berät der Rat den Haushalt – wir berichten."),("🏢","Betriebsbesuche","Wir informieren uns vor Ort bei Unternehmen und Einrichtungen."),("📋","Mitgliederversammlung","Mindestens einmal im Jahr, Einladung mit zwei Wochen Frist."),("💶","Veranstaltung zu den Stadtfinanzen","Eine öffentliche Veranstaltung ist für den Herbst geplant.")]

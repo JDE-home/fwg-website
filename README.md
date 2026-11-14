@@ -31,4 +31,4 @@ Ist `SITE_PASSWORD` nicht gesetzt, antwortet die Seite mit 503 und bleibt gesper
 
 `kandidaten-2025.html` erscheint **nicht** in Navigation oder Footer und ist per `noindex` von Suchmaschinen ausgenommen. Erreichbar ist sie nur über die Karte „Wer hinter dem Programm steht“ am Ende des Abschnitts „Programm 2025“ auf `programm.html`.
 
-Die Inhalte kommen aus `candidates.json` (**aktuell Dummy-Daten**): Wahlbezirk, Name, Kernaussage, Themen, `gewaehlt` (true/false) und optional `photo` (Pfad zu einem Bild). Einträge ohne Kernaussage werden mit einem Hinweis angezeigt. Nach dem Ändern `python3 build.py` ausführen.
+Die Inhalte kommen aus `candidates.json` (Stand 14.11.2026, Kernaussagen gekürzt, Themen von uns zugeordnet): Wahlbezirk, Name, Kernaussage, Themen, `gewaehlt` (true/false) und optional `photo` (Pfad zu einem Bild; aktuell noch leer). Einträge ohne Kernaussage werden mit einem Hinweis angezeigt. Nach dem Ändern `python3 build.py` ausführen.

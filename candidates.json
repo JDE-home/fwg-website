@@ -1,21 +1,21 @@
 {
- "_hinweis": "DUMMY-DATEN: Namen, Aussagen, Themen und die Markierung 'gewaehlt' durch echte Werte ersetzen.",
+ "_hinweis": "Quelle: fwg-oelde.de (Kandidatenseiten 2025), Stand 14.11.2026. Kernaussagen gekürzt; Themen und 'gewaehlt' (die fünf Ratsmitglieder) von uns zugeordnet. Fotos fehlen noch ('photo' = Pfad zu einem Bild).",
  "wahltag": "14. September 2025",
  "kandidaten": [
   {
    "wahlbezirk": 1,
-   "name": "Kandidat/in 1",
-   "statement": "Platzhaltertext für die Kernaussage im Wahlbezirk. Hier folgt später ein Satz zu den Schwerpunkten.",
+   "name": "Hubert Bleß",
+   "statement": "Bezahlbarer Wohnraum, Sanierung der Geiststraße, Barrierefreiheit in der Innenstadt, Wiederaufbau der Gläsernen Küche im Park und ein gutes Freizeit- und Sportstättenangebot.",
    "themes": [
-    "Finanzen",
-    "Bildung"
+    "Wohnen",
+    "Stadtentwicklung"
    ],
-   "gewaehlt": true,
+   "gewaehlt": false,
    "photo": ""
   },
   {
    "wahlbezirk": 2,
-   "name": "Kandidat/in 2",
+   "name": "Marc Hunkenschröder",
    "statement": "",
    "themes": [],
    "gewaehlt": false,
@@ -23,43 +23,44 @@
   },
   {
    "wahlbezirk": 3,
-   "name": "Kandidat/in 3",
-   "statement": "Platzhaltertext für eine kurze Kernaussage.",
+   "name": "Ralf Niebusch",
+   "statement": "Solide Finanzen, bezahlbarer Wohnraum und Nachverdichtung. Zweifel, dass die teure AUREA-Erweiterung deutlich mehr Arbeitsplätze bringt. Sachliche Diskussion ohne Fraktionszwang.",
    "themes": [
-    "Bildung",
-    "Klima"
+    "Finanzen",
+    "Wohnen",
+    "Wirtschaft"
    ],
    "gewaehlt": false,
    "photo": ""
   },
   {
    "wahlbezirk": 4,
-   "name": "Kandidat/in 4",
-   "statement": "Platzhaltertext für die Kernaussage. Hier steht später die Aussage der Kandidatin oder des Kandidaten zu den Schwerpunkten im Wahlbezirk, zum Beispiel zu Finanzen, Wohnraum und Bildung. Dieser Text ist bewusst länger, um das Layout zu testen.",
+   "name": "Alexander Fertich",
+   "statement": "Weniger Bürokratie, gezielte Digitalisierung und Netzwerke für lokale Betriebe. Sozialer Wohnungsbau, Nachverdichtung und Haushaltsdisziplin mit strategischen Investitionen.",
    "themes": [
     "Wirtschaft",
-    "Wohnen"
+    "Wohnen",
+    "Finanzen"
    ],
    "gewaehlt": false,
    "photo": ""
   },
   {
    "wahlbezirk": 5,
-   "name": "Kandidat/in 5",
-   "statement": "Platzhaltertext für die Kernaussage im Wahlbezirk. Hier folgt später ein Satz zu den Schwerpunkten.",
+   "name": "Friedhelm Hoberg",
+   "statement": "Starke lokale Wirtschaft (Flächen, Fachkräfte, Infrastruktur), Priorität für Bildung und sorgfältige Prüfung von Bauprojekten. Dialog ohne Parteivorgaben.",
    "themes": [
-    "Ortsteile",
-    "Wirtschaft"
+    "Wirtschaft",
+    "Bildung"
    ],
-   "gewaehlt": true,
+   "gewaehlt": false,
    "photo": ""
   },
   {
    "wahlbezirk": 6,
-   "name": "Kandidat/in 6",
-   "statement": "Platzhaltertext für eine kurze Kernaussage.",
+   "name": "Berthold Sindermann",
+   "statement": "Kritische Kontrolle der Verwaltung und realistische Baukosten, etwa bei der Veranstaltungshalle. Knappe Mittel, kein Rücklagenverzehr. Zusammenarbeit statt Ideologie.",
    "themes": [
-    "Bürgerbeteiligung",
     "Finanzen"
    ],
    "gewaehlt": false,
@@ -67,107 +68,79 @@
   },
   {
    "wahlbezirk": 7,
-   "name": "Kandidat/in 7",
-   "statement": "Platzhaltertext für die Kernaussage im Wahlbezirk. Hier folgt später ein Satz zu den Schwerpunkten.",
+   "name": "Ludger Lücke",
+   "statement": "Starke heimische Wirtschaft, bezahlbare Klimaanpassung, Schuldenabbau und eine generationengerechte Zukunft.",
    "themes": [
-    "Klima",
-    "Finanzen"
-   ],
-   "gewaehlt": false,
-   "photo": ""
-  },
-  {
-   "wahlbezirk": 8,
-   "name": "Kandidat/in 8",
-   "statement": "Platzhaltertext für die Kernaussage. Hier steht später die Aussage der Kandidatin oder des Kandidaten zu den Schwerpunkten im Wahlbezirk, zum Beispiel zu Finanzen, Wohnraum und Bildung. Dieser Text ist bewusst länger, um das Layout zu testen.",
-   "themes": [
+    "Wirtschaft",
     "Finanzen",
-    "Bildung"
-   ],
-   "gewaehlt": false,
-   "photo": ""
-  },
-  {
-   "wahlbezirk": 9,
-   "name": "Kandidat/in 9",
-   "statement": "Platzhaltertext für eine kurze Kernaussage.",
-   "themes": [
-    "Wohnen",
-    "Ortsteile"
-   ],
-   "gewaehlt": true,
-   "photo": ""
-  },
-  {
-   "wahlbezirk": 10,
-   "name": "Kandidat/in 10",
-   "statement": "Platzhaltertext für die Kernaussage im Wahlbezirk. Hier folgt später ein Satz zu den Schwerpunkten.",
-   "themes": [
-    "Bildung",
     "Klima"
    ],
    "gewaehlt": false,
    "photo": ""
   },
   {
-   "wahlbezirk": 11,
-   "name": "Kandidat/in 11",
-   "statement": "Platzhaltertext für die Kernaussage im Wahlbezirk. Hier folgt später ein Satz zu den Schwerpunkten.",
+   "wahlbezirk": 8,
+   "name": "Andreas Sumkötter",
+   "statement": "Ganztagsschulen, Schulsozialarbeit und Teilhabe von Jugendlichen. Generationengerechter Wohnraum und Arbeitsplätze, solidarisches Miteinander.",
    "themes": [
-    "Wirtschaft",
+    "Bildung",
     "Wohnen"
    ],
    "gewaehlt": false,
    "photo": ""
   },
   {
-   "wahlbezirk": 12,
-   "name": "Kandidat/in 12",
-   "statement": "Platzhaltertext für die Kernaussage. Hier steht später die Aussage der Kandidatin oder des Kandidaten zu den Schwerpunkten im Wahlbezirk, zum Beispiel zu Finanzen, Wohnraum und Bildung. Dieser Text ist bewusst länger, um das Layout zu testen.",
+   "wahlbezirk": 9,
+   "name": "Manuela Steuer",
+   "statement": "Knappe Mittel für Straßen, Kitas, Schulen und bezahlbaren Wohnraum statt teurer Großprojekte. Starke Wirtschaft und Bürgerdialog. „Intoleranz und Ausgrenzung haben bei mir keinen Platz.“",
    "themes": [
-    "Ortsteile",
-    "Wirtschaft"
-   ],
-   "gewaehlt": false,
-   "photo": ""
-  },
-  {
-   "wahlbezirk": 13,
-   "name": "Kandidat/in 13",
-   "statement": "Platzhaltertext für die Kernaussage im Wahlbezirk. Hier folgt später ein Satz zu den Schwerpunkten.",
-   "themes": [
-    "Bürgerbeteiligung",
-    "Finanzen"
+    "Finanzen",
+    "Wohnen",
+    "Bildung"
    ],
    "gewaehlt": true,
    "photo": ""
   },
   {
-   "wahlbezirk": 14,
-   "name": "Kandidat/in 14",
-   "statement": "Platzhaltertext für die Kernaussage im Wahlbezirk. Hier folgt später ein Satz zu den Schwerpunkten.",
+   "wahlbezirk": 10,
+   "name": "Wolf-Rüdiger Soldat",
+   "statement": "Abbau der hohen Verschuldung, Schulsozialarbeit, bessere Lernbedingungen und ein Jugendparlament. Bürgernähe, Transparenz und Respekt.",
    "themes": [
-    "Klima",
-    "Finanzen"
+    "Finanzen",
+    "Bildung",
+    "Bürgernähe"
    ],
    "gewaehlt": false,
    "photo": ""
   },
   {
-   "wahlbezirk": 15,
-   "name": "Kandidat/in 15",
-   "statement": "Platzhaltertext für eine kurze Kernaussage.",
+   "wahlbezirk": 11,
+   "name": "Rolf Pickenäcker",
+   "statement": "Generationengerechte Finanzen und ein ausgeglichener Haushalt, nachhaltige Entwicklung in Stadt und Ortsteilen, Bildung und Sport.",
    "themes": [
     "Finanzen",
+    "Ortsteile",
     "Bildung"
    ],
    "gewaehlt": false,
    "photo": ""
   },
   {
-   "wahlbezirk": 16,
-   "name": "Kandidat/in 16",
-   "statement": "Platzhaltertext für die Kernaussage. Hier steht später die Aussage der Kandidatin oder des Kandidaten zu den Schwerpunkten im Wahlbezirk, zum Beispiel zu Finanzen, Wohnraum und Bildung. Dieser Text ist bewusst länger, um das Layout zu testen.",
+   "wahlbezirk": 12,
+   "name": "Thorsten Fibbe",
+   "statement": "Moderne Infrastruktur mit schnellem Internet, Mobilität, Kitas, Schulen, Wohnraum und Freizeit. Bürokratieabbau, Unterstützung von Handel und Gewerbe, solide Finanzen. „Gegen Einsamkeit und für ein starkes Gemeinwohl.“",
+   "themes": [
+    "Stadtentwicklung",
+    "Wirtschaft",
+    "Finanzen"
+   ],
+   "gewaehlt": false,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 13,
+   "name": "Achim Hakenholt",
+   "statement": "Neuer Wohnraum durch flexible Modelle und Nachverdichtung, besonders in den Ortsteilen, bei gesicherten Kitas und Schulen. Infrastruktur erhalten, Ehrenamt stärken. „Miteinander statt Einsamkeit.“",
    "themes": [
     "Wohnen",
     "Ortsteile"
@@ -176,8 +149,44 @@
    "photo": ""
   },
   {
+   "wahlbezirk": 14,
+   "name": "Thomas Populoh",
+   "statement": "Standard bei Kitas, Schulen und Sportstätten sichern und ausbauen, Wohnraum durch Nachverdichtung in den Ortsteilen, Ehrenamt unterstützen. „Weniger reden, mehr anpacken.“",
+   "themes": [
+    "Bildung",
+    "Ortsteile",
+    "Wohnen"
+   ],
+   "gewaehlt": true,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 15,
+   "name": "Jannik Desel",
+   "statement": "Finanzielle Disziplin, Familienfreundlichkeit (Betreuung, Bildung, Freizeit) und gezielte Unterstützung lokaler Unternehmen. Keine starren Parteivorgaben.",
+   "themes": [
+    "Finanzen",
+    "Bildung",
+    "Wirtschaft"
+   ],
+   "gewaehlt": false,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 16,
+   "name": "Thorsten Retzlaff",
+   "statement": "Generationengerechte Finanzpolitik mit Schuldenabbau, bezahlbarer Wohnraum, starke Ortsteile und intakte Infrastruktur. Bürgernähe durch Digitalisierung und lokale Sprechstunden.",
+   "themes": [
+    "Finanzen",
+    "Wohnen",
+    "Ortsteile"
+   ],
+   "gewaehlt": true,
+   "photo": ""
+  },
+  {
    "wahlbezirk": 17,
-   "name": "Kandidat/in 17",
+   "name": "Sebastian Windhövel",
    "statement": "",
    "themes": [],
    "gewaehlt": false,
@@ -185,24 +194,26 @@
   },
   {
    "wahlbezirk": 18,
-   "name": "Kandidat/in 18",
-   "statement": "Platzhaltertext für eine kurze Kernaussage.",
+   "name": "Felix Knop",
+   "statement": "Bezahlbarer Wohnraum für junge Menschen und Familien, Schulen, Kultur und Sport erhalten und ausbauen, maßvolle Investitionen und generationengerechte Finanzen.",
    "themes": [
-    "Wirtschaft",
-    "Wohnen"
+    "Wohnen",
+    "Bildung",
+    "Finanzen"
    ],
    "gewaehlt": true,
    "photo": ""
   },
   {
    "wahlbezirk": 19,
-   "name": "Kandidat/in 19",
-   "statement": "Platzhaltertext für die Kernaussage im Wahlbezirk. Hier folgt später ein Satz zu den Schwerpunkten.",
+   "name": "Bernhard Poppenberg",
+   "statement": "Infrastruktur in den Ortsteilen erhalten und verbessern, kritische Bewertung der Finanzen, Stärkung der lokalen Wirtschaft und bezahlbarer Wohnraum. Bürger einbinden.",
    "themes": [
     "Ortsteile",
+    "Finanzen",
     "Wirtschaft"
    ],
-   "gewaehlt": false,
+   "gewaehlt": true,
    "photo": ""
   }
  ]
