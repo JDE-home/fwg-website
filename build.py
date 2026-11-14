@@ -3,15 +3,22 @@ import json
 P = {p["id"]: p for p in json.load(open("people.json", encoding="utf-8"))}
 NAV = [("index.html","Start"),("ueber-uns.html","Über uns"),("ratsmitglieder.html","Unser Team"),("programm.html","Programm"),("aktuelles.html","Aktuelles"),("termine.html","Termine")]
 MOTTO = "Gemeinschaft fördern. Bürgernähe leben. Zukunft gestalten."
+CAND = json.load(open("candidates.json", encoding="utf-8"))
+cand_themes = sorted({t for c in CAND["kandidaten"] for t in c.get("themes", [])})
+cand_count = len(CAND["kandidaten"]); cand_won = sum(1 for c in CAND["kandidaten"] if c.get("gewaehlt"))
+# Seiten, die nicht in der Navigation auftauchen und nicht indexiert werden sollen
+NOINDEX = {"kandidaten-2025.html"}
+NAV_ACTIVE = {"kandidaten-2025.html": "programm.html"}  # welcher Menüpunkt dabei markiert wird
 
 def layout(fn, title, body, desc):
-    nav = "".join(f'<li><a href="{h}"{" aria-current=page" if h==fn else ""}>{t}</a></li>' for h,t in NAV)
+    active = NAV_ACTIVE.get(fn, fn)
+    nav = "".join(f'<li><a href="{h}"{" aria-current=page" if h==active else ""}>{t}</a></li>' for h,t in NAV)
     nav += f'<li><a class="cta" href="mitmachen.html"{" aria-current=page" if fn=="mitmachen.html" else ""}>Mitmachen</a></li>'
     logo = '<span class="logo"><img src="assets/img/logo.jpg" alt=""></span>'
     return f'''<!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title} – FWG Oelde</title><meta name="description" content="{desc}">
-<meta name="theme-color" content="#29488b">
+<meta name="theme-color" content="#29488b">{'<meta name="robots" content="noindex, nofollow">' if fn in NOINDEX else ""}
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -85,6 +92,58 @@ def news_card(d,e,c,t,x,l):
     href = l or "aktuelles.html"; label = "Bericht lesen" if l else "Alle Beiträge"
     return f'<article class="card news reveal"><div class="thumb {c}">{e}</div><span class="meta">{d}</span><h3>{t}</h3><p>{x}</p><a class="more" href="{href}">{label} →</a></article>'
 
+
+# ---------- Programm 2020 (Rückblick)
+prog2020 = [
+ ("p20-finanzen","💶","Solide Finanzen",["Erfolgreichen Weg der Entschuldung nach der Corona-Krise fortsetzen","Beteiligungen wie die Stadtwerke Ostmünsterland erhalten","Gebühren und Steuern so niedrig wie möglich halten"]),
+ ("p20-wirtschaft","🏭","Wirtschaftsförderung",["Gewerbegebiet A2 schrittweise entwickeln","Erweiterung des Gewerbegebiets AUREA kritisch prüfen","Niedrige Hebesätze als Anreiz für Unternehmen erhalten","Mietwohnungsbau, damit Beschäftigte der Oelder Betriebe vor Ort bleiben können"]),
+ ("p20-schulen","🎒","Schulen und Kitas",["Bedarfsgerechter Ausbau der Offenen Ganztagsschulen (OGS) an den Grundschulen","Sanierungsstau an den Grundschulen abbauen","Mehr Digitalisierung im Primarbereich"]),
+ ("p20-klima","🌳","Klimaschutz und Klimaanpassung",["Ausbau des Radverkehrs","Flächensparendes Bauen durch konsequente Nachverdichtung","Intelligente Regenwasserrückhaltung","Ausbau der Solarenergienutzung","Nachhaltigkeitsstandards in den Bebauungsplänen","Sanierungskonzepte für den Gebäudebestand"]),
+ ("p20-energie","☀️","Regenerative Energie",["Ausbau regenerativer Energie für öffentliche Gebäude","Die Förderung privater Haushalte dabei nicht aus dem Blick verlieren"]),
+ ("p20-ortsteile","🏘️","Lebenswerte Ortsteile",["Vorhandene Kindergärten und Schulen in Lette, Stromberg und Sünninghausen unbedingt erhalten","Sportvereine bei ihren Anlagen unterstützen","Bessere Anbindung durch den ÖPNV"]),
+ ("p20-hausarzt","🩺","Hausärztliche Versorgung",["Maßnahmenpaket gegen eine drohende Unterversorgung, denn viele niedergelassene Oelder Allgemeinmediziner sind bereits älter","Standortvorteile Oeldes bei der Anwerbung medizinischen Personals offensiver kommunizieren"]),
+ ("p20-weitere","🧭","Weitere Themen",["Leben und Wohnen im Alter","Städtepartnerschaft in Europa"]),
+]
+done2020 = [
+ ("2017 → 2021","Erreicht","ok","Ökostrom für städtische Gebäude: von der FWG 2017 gefordert, ab 2021 zu 100 % umgesetzt."),
+ ("2019","Haltung","info","Stellungnahme gegen die AUREA-Erweiterung: hoher Flächenverbrauch, wenig Gewerbesteuer, leerer Arbeitsmarkt."),
+ ("Mai 2020","Antrag","act","Antrag „Seebrücke – sicherer Hafen“ im Rat der Stadt."),
+ ("Wahlkampf 2020","Aktion","info","Notfalldosen statt Werbegeschenken, die Telefonaktion „FWG im Dialog“ und die Laufaktion „FWG informiert laufend“; dazu Betriebsbesuche, etwa im Autohaus Schlüter + Weinekötter und bei Verhoff’s Tierfachmarkt."),
+ ("Haushalt 2020","Zustimmung","ok","Die FWG stimmt dem Haushalt 2020 zu, ohne dass die Hebesätze steigen. Investiert werden rund 35 Mio. €, vor allem in Schulen. Die AUREA-Erweiterung lehnt die FWG ab."),
+ ("Haushalt 2020","Antrag","act","Anträge: Busse zu den Stadtfesten, Klimaprojekt-Budgets für Schulen, mehr Fahrradstellplätze, ein „Tag der offenen Tür in der Verwaltung“ und das Pflegeprojekt in Lette."),
+ ("November 2020","Fraktion","info","Neue Fraktionsspitze mit Wolfgang Bovekamp als Vorsitzendem und Manuela Steuer als Stellvertreterin. Die Fraktion hat damals sechs Ratsmitglieder."),
+ ("Haushalt 2021","Antrag","act","Anträge: Lastenradprämie für Privatpersonen (10.000 €), mobiles Grün auf dem Marktplatz (10.000 €) und Mittel für die Städtepartnerschaft (5.000 €)."),
+ ("Haushalt 2023","Antrag","act","Mehr Geld für Photovoltaik (von 100.000 auf 300.000 €), Ziel Klimaneutralität 2035 und ein gemeinsamer Antrag mit SPD und Grünen zum städtischen Wohnungsbau."),
+]
+changes = [
+ ("Finanzen","Entschuldung nach Corona fortsetzen, Beteiligungen wie die Stadtwerke erhalten","Schuldenabbau, Investitionen nur mit Kosten-Nutzen-Bewertung, keine Prestigeprojekte","Schärfer","mid"),
+ ("Wirtschaft","Gewerbegebiet A2 entwickeln, AUREA-Erweiterung prüfen","Citymanagement, Leerstände abbauen, Raum für Handwerk und Kleingewerbe","Neu gewichtet","info"),
+ ("Bildung","OGS-Ausbau, Sanierungsstau, Digitalisierung","Wohnortnahe Kitaplätze, mehr Schulsozialarbeit, Unterstützung der VHS","Neu gewichtet","info"),
+ ("Klima","Klimaschutz, Solarenergie, Nachhaltigkeitsstandards in Bebauungsplänen","Konkreter Hochwasser- und Hitzeschutz, Radwege, Fahrradstellplätze","Konkreter","info"),
+ ("Energie","Eigene Rubrik: regenerative Energie für öffentliche Gebäude","Keine eigene Rubrik mehr","Entfallen","no"),
+ ("Ortsteile","Kitas und Schulen erhalten, Sportvereine unterstützen","Zusätzlich Bauplätze, Straßen, Rad- und Wirtschaftswege","Fortgeführt","ok"),
+ ("Gesundheit und Alter","Hausärztliche Versorgung, Leben und Wohnen im Alter","Seniorenarbeit unter „Gemeinschaft“, kein eigener Gesundheitspunkt","Entfallen","no"),
+ ("Beteiligung","–","Livestream der Sitzungen, Jugendparlament, Bürgersprechstunden, digitale Services","Neu","ok"),
+ ("Wohnen und Stadt","Mietwohnungsbau für Beschäftigte","Bezahlbarer, barrierefreier Wohnraum, Geiststraße, Gläserne Küche","Erweitert","info"),
+ ("Europa","Städtepartnerschaft in Europa","Nicht mehr im Programm","Entfallen","no"),
+]
+prog2020_html = f'''<section class="alt" id="programm2020"><div class="container">
+<div class="section-head reveal"><span class="eyebrow">Rückblick</span><h2>Programm 2020: Was wir uns vorgenommen und was wir getan haben.</h2><p class="lead">Zur Kommunalwahl am 13. September 2020 trat die FWG mit acht Schwerpunkten an. Hier steht, was im Programm stand und was daraus in Rat und Wahlkampf wurde.</p></div>
+<div class="split" style="align-items:start;gap:2.2rem">
+<div><h3 class="reveal" style="margin-bottom:1rem">Das Programm 2020</h3>{"".join(f'<details id="{k}" class="reveal"><summary><span>{i} {t}</span></summary><div>{ul(items)}</div></details>' for k,i,t,items in prog2020)}</div>
+<div><h3 class="reveal" style="margin-bottom:1rem">Was daraus wurde</h3><div class="timeline">{"".join(f'<div class="item reveal"><b>{y}</b> <span class="pill {c}">{k}</span><p>{t}</p></div>' for y,k,c,t in done2020)}</div></div></div>
+<div class="section-head reveal" style="margin-top:3.5rem"><h3>Was sich 2025 geändert hat</h3><p class="lead" style="font-size:1.05rem">Unsere Einordnung nach einem Vergleich der beiden Programmtexte: Die Finanzen stehen schärfer im Mittelpunkt, Bürgernähe ist neu, einige Themen sind entfallen.</p></div>
+<div class="table-wrap reveal"><table class="fin stack"><thead><tr><th>Thema</th><th>2020</th><th>2025</th><th>Änderung</th></tr></thead><tbody>{"".join(f'<tr><td data-label="Thema"><b>{a}</b></td><td data-label="2020">{b}</td><td data-label="2025">{c}</td><td data-label="Änderung"><span class="pill {p}">{k}</span></td></tr>' for a,b,c,k,p in changes)}</tbody></table></div>
+<p class="note">Zusammengestellt aus den veröffentlichten Programmtexten und Haushaltsreden der FWG. „Leben und Wohnen im Alter“ und „Städtepartnerschaft“ sind nur als Überschrift bekannt. Bitte mit dem Wahlprogramm-Flyer von 2020 abgleichen.</p>
+</div></section>'''
+
+wk_posts = [
+ ("16. Juli 2025","🙋","t2","Wir sind bereit – und freuen uns auf den Austausch!","Unser Team steht in den Startlöchern. Die Kandidatinnen und Kandidaten für alle Wahlbezirke stehen fest.","Wahlkampf","wahlkampf-wir-sind-bereit.html"),
+ ("2. August 2025","🏭","t1","Besuch bei SMI: starker Mittelstand in Oelde","Die FWG besucht die SMI Service GmbH &amp; Co. KG im Gewerbegebiet A2 und informiert sich über Fachkräfte, Digitalisierung und Nachhaltigkeit.","Wahlkampf","wahlkampf-smi.html"),
+ ("24. August 2025","🛒","t3","FWG im Dialog auf dem Wochenmarkt","Gespräche über Verschuldung, Wasserspender statt Wasserläufe, Hochbeete, Leerstand, Geiststraße und bezahlbaren Wohnraum.","Wahlkampf","wahlkampf-wochenmarkt.html"),
+ ("27. August 2025","🗳️","t2","Wahlaufruf: Gehen Sie wählen!","Der Aufruf der FWG zur Beteiligung an der Kommunalwahl am 14. September 2025.","Wahlaufruf","wahlkampf-wahlaufruf.html"),
+]
+
 pages = {}
 # ---------- Start
 home_cards = "".join(card(i,t,d,f"programm.html#{k}") for k,i,t,d,_ in [topics[1],topics[2],topics[3],topics[6],topics[5],topics[0]])
@@ -148,18 +207,22 @@ fin=[("2015","Ablehnung","no","Streit um die Grundsteuererhöhung; Haushalt von 
 ("2023","Zustimmung","ok","Priorisierung und Transparenz; Wohnungsbau-Antrag mit SPD und Grünen; PV-Mittel von 100.000 auf 300.000 €."),
 ("2024","Ablehnung","no","Multifunktionshalle von 19,13 auf 22,8 Mio. € gestiegen, Wasserspiel im Kreisverkehr, zu optimistische Gewerbesteuerprognose."),
 ("2025","Zustimmung unter starken Vorbehalten","mid","Defizit von 12,36 Mio. €; Schulden steigen bis 2027 auf 73,73 Mio. €. „Planung muss dem Budget folgen.“")]
-pages["programm.html"] = ("Programm","Das Wahlprogramm 2025 der FWG Oelde: Gemeinschaft, Finanzen, Bildung, Wirtschaft, Klima, Ortsteile.", hero("Programm 2025",MOTTO,"Unser Wahlprogramm zur Kommunalwahl vom 14. September 2025 – klar, machbar und finanzierbar.")+f'''
-<section><div class="container" style="max-width:860px">{"".join(f'<details id="{k}" class="reveal"{" open" if n==0 else ""}><summary><span>{i} {t}</span></summary><div><p>{d}</p>{ul(items)}</div></details>' for n,(k,i,t,d,items) in enumerate(topics))}</div></section>
-<section class="alt" id="haushalt"><div class="container"><div class="section-head reveal"><span class="eyebrow">Haushalt im Fokus</span><h2>Wie die FWG zum Haushalt stimmt.</h2><p class="lead">Unsere Linie: generationengerechtes Kostenbewusstsein, Schuldenabbau, Transparenz. Zustimmen, wenn es trägt – ablehnen, wenn nicht.</p></div>
+pages["programm.html"] = ("Programm","Das Wahlprogramm 2025 der FWG Oelde und der Rückblick auf das Programm 2020: Finanzen, Bildung, Wirtschaft, Klima, Ortsteile.", hero("Programm 2025",MOTTO,"Unser Wahlprogramm zur Kommunalwahl vom 14. September 2025 – klar, machbar und finanzierbar.")+f'''
+<section id="programm2025"><div class="container" style="max-width:860px">{"".join(f'<details id="{k}" class="reveal"{" open" if n==0 else ""}><summary><span>{i} {t}</span></summary><div><p>{d}</p>{ul(items)}</div></details>' for n,(k,i,t,d,items) in enumerate(topics))}
+<div class="card reveal" style="margin-top:2rem;display:flex;gap:1.2rem;align-items:center;justify-content:space-between;flex-wrap:wrap"><div><h3 style="margin:0 0 .3rem">Wer hinter dem Programm steht</h3><p style="margin:0">Unsere Kandidatinnen und Kandidaten aus allen {cand_count} Wahlbezirken und ihre Schwerpunkte.</p></div><a class="btn btn-dark" href="kandidaten-2025.html">Zur Kandidatenübersicht →</a></div></div></section>
+{prog2020_html}
+<section id="haushalt"><div class="container"><div class="section-head reveal"><span class="eyebrow">Haushalt im Fokus</span><h2>Wie die FWG zum Haushalt stimmt.</h2><p class="lead">Unsere Linie: generationengerechtes Kostenbewusstsein, Schuldenabbau, Transparenz. Zustimmen, wenn es trägt – ablehnen, wenn nicht.</p></div>
 <div class="table-wrap reveal"><table class="fin"><thead><tr><th>Jahr</th><th>Votum</th><th>Begründung</th></tr></thead><tbody>{"".join(f'<tr><td><b>{y}</b></td><td><span class="pill {c}">{v}</span></td><td>{t}</td></tr>' for y,v,c,t in fin)}</tbody></table></div></div></section>
 {band("Ihre Idee fehlt?","Sagen Sie uns, was Oelde braucht – wir nehmen es mit in den Rat.","kontakt.html","Kontakt aufnehmen")}''')
 
 # ---------- Aktuelles
 posts=[("November 2026","📊","t3","Bericht: Haushaltsberatungen","Wir berichten über die Haushaltsberatungen im Rat – der Bericht folgt im November.","Folgt",""),
+("2026","🏥","t3","Marienhospital Oelde: Schließung trifft die Stadt","Die Katholische Hospitalvereinigung Ostwestfalen schließt das Marienhospital zum Jahresende 2026. Die FWG fordert Transparenz über die wirtschaftlichen Gründe, ein Konzept für die wohnortnahe Versorgung und mehr als ein bloßes Bekenntnis zum Standort.","Stellungnahme","marienhospital-2026.html"),
 ("Haushalt 2026","🎤","t1","Haushaltsrede von Thorsten Retzlaff","Die letzte Haushaltsrede unseres Fraktionsvorsitzenden Thorsten Retzlaff. Der Rat verabschiedete den Etat 2026 mit den Stimmen von CDU, FWG, FDP, Volt und Linken. Die Rede im Wortlaut wird hier veröffentlicht.","Rede",""),
 ("Juli 2026","🗳️","t2","FWG wählt Bernhard Poppenberg zum neuen Vorsitzenden","Nach fast 17 Jahren gibt Friedhelm Hoberg den Vorsitz ab. Bei der Mitgliederversammlung im Sportlerheim Lette wurde Bernhard Poppenberg einstimmig zum Nachfolger gewählt. Dazu Berichte aus Kreistag und Rat und große Sorgen um die Stadtfinanzen.","Bericht","jahreshauptversammlung-2026.html")]
 pages["aktuelles.html"] = ("Aktuelles","Neuigkeiten, Besuche und Positionen der FWG Oelde.", hero("Aktuelles 2026","Neuigkeiten aus Oelde.","Berichte und Positionen der FWG aus dem laufenden Jahr.")+f'''
-<section><div class="container"><div class="grid g3">{"".join(post_card(*p) for p in posts)}</div></div></section>''')
+<section><div class="container"><div class="grid g3">{"".join(post_card(*p) for p in posts)}</div></div></section>
+<section class="alt" id="wahlkampf2025"><div class="container"><div class="section-head reveal"><span class="eyebrow">Rückblick</span><h2>Wahlkampf 2025</h2><p class="lead">Aktionen und Beiträge zur Kommunalwahl am 14. September 2025.</p></div><div class="grid g3">{"".join(post_card(*p) for p in wk_posts)}</div></div></section>''')
 
 # ---------- Artikel: Jahreshauptversammlung 2026
 pages["jahreshauptversammlung-2026.html"] = ("Neuer Vorsitzender","FWG wählt Bernhard Poppenberg zum neuen Vorsitzenden: Bericht von der Mitgliederversammlung in Lette.", hero("Aktuelles · Juli 2026","FWG wählt Bernhard Poppenberg zum neuen Vorsitzenden","Mitgliederversammlung im Sportlerheim Lette: Friedhelm Hoberg gibt nach fast 17 Jahren den Vorsitz ab.")+f'''
@@ -181,6 +244,70 @@ pages["jahreshauptversammlung-2026.html"] = ("Neuer Vorsitzender","FWG wählt Be
 <p style="margin-top:1.5rem">Im Anschluss an den offiziellen Teil klang der Abend bei Grillwurst und kühlen Getränken aus. Organisiert wurde dieser Teil von Achim Hakenholt und Thomas Populoh, denen die Versammlung ein großes Lob aussprach.</p>
 <p><a class="btn btn-dark" href="aktuelles.html">← Alle Beiträge</a></p>
 </div></div></section>''')
+
+# ---------- Artikel: Marienhospital
+pages["marienhospital-2026.html"] = ("Marienhospital","Die FWG Oelde zur Schließung des Marienhospitals: Transparenz, ein Versorgungskonzept und gemeinsames Handeln aller Fraktionen.", hero("Aktuelles · Stellungnahme","Marienhospital Oelde: Die Schließung trifft die ganze Stadt","Die FWG fordert Transparenz über die Hintergründe und ein tragfähiges Konzept für die medizinische Versorgung vor Ort.")+f'''
+<section><div class="container article"><div class="prose">
+<p class="lead">Die Katholische Hospitalvereinigung Ostwestfalen (KHO) hat angekündigt, das Marienhospital in Oelde zum Jahresende 2026 zu schließen. Betroffen sind rund 400 Beschäftigte. Die ambulanten Angebote (MVZ und AOZ) sollen ab Januar 2027 weitergeführt werden, eine stationäre Versorgung wird es danach nicht mehr geben.</p>
+<h2>Gemeinsam für die Versorgung vor Ort</h2>
+<p>Alle Fraktionen im Rat und Bürgermeisterin Karin Rodeheger haben dazu eine gemeinsame Stellungnahme abgegeben, für die FWG unterzeichnet von Fraktionsvorsitzendem Thorsten Retzlaff. Darin bekennen sie sich geschlossen zu einer starken, wohnortnahen und verlässlichen medizinischen Versorgung. Von der KHO-Geschäftsführung erwarten sie, ihrer Verantwortung gegenüber den Beschäftigten gerecht zu werden. Von Land und Kreis erwarten sie Konzepte für die wohnortnahe Versorgung.</p>
+<h2>Unsere Position</h2>
+<p>Ein Bekenntnis zum Standort allein reicht der FWG nicht. Wir fordern:</p>
+{ul(["Transparenz über die wesentlichen wirtschaftlichen Fakten und die Gründe für die Entwicklung","Offenlegung, welche Unterstützung die Träger bisher geleistet haben und welchen Beitrag sie künftig leisten wollen","Klarheit darüber, welche Gesundheitsversorgung Oelde langfristig braucht und wie sie gesichert werden kann"])}
+<h2>Kein neues Thema für die FWG</h2>
+<p>Schon in unserem Wahlprogramm 2020 haben wir ein Maßnahmenpaket gegen eine drohende Unterversorgung gefordert und dafür geworben, die Standortvorteile Oeldes bei der Anwerbung medizinischen Personals offensiver zu kommunizieren. <a href="programm.html#programm2020">Zum Programm 2020</a></p>
+<div class="card reveal"><h3>Quellen</h3><ul class="checks"><li><a href="https://www.oelde.de/de/rathaus/veroeffentlichungen/gut-zu-wissen/gemeinsame-stellungnahme-der-fraktionen-und-von-buergermeisterin-karin-rodeheger/" target="_blank" rel="noopener">Gemeinsame Stellungnahme der Fraktionen und der Bürgermeisterin (Stadt Oelde)</a></li><li><a href="https://www.die-glocke.de/kreis-warendorf/oelde/artikel/marienhospital-oelde-bekenntnis-zum-standort-reicht-nicht-1786288223" target="_blank" rel="noopener">„Bekenntnis zum Standort reicht nicht“ (Die Glocke)</a></li><li><a href="https://www.bibliomedmanager.de/news/marienhospital-oelde-schliessung-medizinische-versorgung" target="_blank" rel="noopener">Stadt fordert Versorgungskonzept (bibliomedmanager.de)</a></li></ul></div>
+<p style="margin-top:1.5rem"><a class="btn btn-dark" href="aktuelles.html">← Alle Beiträge</a></p>
+</div></div></section>''')
+
+# ---------- Rückblick: Kandidaten 2025 (nur über das Programm erreichbar)
+def cand_card(c):
+    n = c["wahlbezirk"]
+    badge = '<span class="cand-won">In den Rat gewählt</span>' if c.get("gewaehlt") else ""
+    media = f'<img src="{c["photo"]}" alt="Foto {c["name"]}">' if c.get("photo") else f'<span class="cand-num" aria-hidden="true">{n}</span>'
+    pills = "".join(f'<span class="pill info">{t}</span>' for t in c.get("themes", []))
+    text = c["statement"] if c.get("statement") else '<em class="muted">Zu diesem Wahlbezirk liegt keine Kernaussage vor.</em>'
+    data = " ".join(c.get("themes", []))
+    return f'<article class="cand reveal" data-themes="{data}"><div class="cand-media">{media}<span class="cand-wb">Wahlbezirk {n}</span>{badge}</div><div class="cand-body"><h3>{c["name"]}</h3><p>{text}</p><div class="cand-pills">{pills}</div></div></article>'
+pages["kandidaten-2025.html"] = ("Kandidaten 2025","Rückblick: Die Kandidatinnen und Kandidaten der FWG Oelde zur Kommunalwahl 2025.", hero("Rückblick · Kommunalwahl "+CAND["wahltag"],"Unsere Kandidatinnen und Kandidaten 2025",f"{cand_count} Wahlbezirke, {cand_count} Kandidaturen: Wer für die FWG angetreten ist und wofür die Einzelnen standen.")+f'''
+<section><div class="container">
+<p><a href="programm.html#programm2025">← Zurück zum Programm 2025</a></p>
+<div class="stats stats3" style="margin-top:1rem"><div class="stat"><b>{cand_count}</b><span>Wahlbezirke</span></div><div class="stat"><b>{cand_won}</b><span>Mandate im Stadtrat</span></div><div class="stat"><b>{len(cand_themes)}</b><span>Themenschwerpunkte</span></div></div>
+<div class="chips reveal" role="group" aria-label="Nach Thema filtern"><button class="chip on" data-filter="">Alle</button>{"".join(f'<button class="chip" data-filter="{t}">{t}</button>' for t in cand_themes)}</div>
+<div class="cands">{"".join(cand_card(c) for c in CAND["kandidaten"])}</div>
+<p class="note cand-empty" hidden>Zu diesem Thema gibt es keine Kandidaturen.</p>
+<p class="note">Rückblick auf die Kandidaturen zur Kommunalwahl am {CAND["wahltag"]}. Die Aussagen geben den Stand zum Wahlkampf wieder.</p>
+</div></section>''')
+
+# ---------- Wahlkampf 2025: Beiträge von der bisherigen Website
+def article(fn, title, desc, eyebrow, h1, lead, body):
+    pages[fn] = (title, desc, hero(eyebrow, h1, lead)+f'''<section><div class="container article"><div class="prose">{body}<p style="margin-top:1.5rem"><a class="btn btn-dark" href="aktuelles.html#wahlkampf2025">← Zurück zum Rückblick</a></p></div></div></section>''')
+
+article("wahlkampf-wir-sind-bereit.html","Wir sind bereit","Unser Team steht in den Startlöchern für den Wahlkampf in Oelde.","Wahlkampf 2025 · 16. Juli 2025","Wir sind bereit – und freuen uns auf den Austausch!","Unser Team steht in den Startlöchern für den Wahlkampf in Oelde.",
+ '''<p>In den kommenden Wochen wollen wir mit Ihnen ins Gespräch kommen, zuhören, diskutieren und gemeinsam herausfinden, was Oelde bewegt.</p>
+<h2>Unsere Kandidaten</h2><p>Unsere Kandidatinnen und Kandidaten für Oelde stehen fest! In allen Wahlbezirken sind wir mit engagierten Menschen vertreten, die sich mit Herz und Verstand für unsere Stadt einsetzen wollen. In den nächsten Wochen stellen wir hier unser Team und ihre Themen genauer vor.</p>''')
+
+article("wahlkampf-smi.html","Besuch bei SMI","Die FWG Oelde besucht die Firma SMI im Gewerbegebiet A2: starker Mittelstand in Oelde.","Wahlkampf 2025 · 2. August 2025","FWG zu Besuch bei SMI – starker Mittelstand in Oelde","Im Rahmen der regelmäßigen Unternehmensbesuche war die FWG bei SMI (Service, Montage, Inbetriebnahme) im Gewerbegebiet A2.",
+ '''<p>Der Austausch mit lokalen Betrieben ist der FWG ein wichtiges Anliegen, um sich über aktuelle Entwicklungen und Herausforderungen vor Ort zu informieren und den Wirtschaftsstandort Oelde zu stärken.</p>
+<p>Nadine Schneider, Geschäftsführer Benedikt Wallschlag und Prokuristin Maike Hiegemann gaben der FWG einen umfassenden Einblick in die Abläufe des Unternehmens. Die 1999 gegründete Firma bezog 2024 ihren modernen Neubau im Gewerbegebiet A2.</p>
+<p>Im Mittelpunkt des Betriebs stehen innovative Lösungen rund um Tür- und Fensterautomatik, Rauchabzug, Fluchtwegsicherung und Zutrittskontrolle. Bei der Planung des neuen Standorts legte Firmengründer Ulrich Schneider besonderen Wert auf digitalisierte und effiziente Prozesse. Die Gäste der FWG zeigten sich beeindruckt von den lichtdurchfluteten, nahezu papierlos organisierten Büros sowie der technisch modernen Fertigung mit CNC-gesteuerten Maschinen.</p>
+<p>Aktuell sind rund 40 Mitarbeiterinnen und Mitarbeiter bei SMI beschäftigt. Die Geschäftsführung legt großen Wert auf ein gutes, familiäres Betriebsklima, das als wichtige Grundlage für Mitarbeiterzufriedenheit und langfristige Bindung gesehen wird. Denn auch die Gewinnung und Entwicklung von Fachkräften ist ein zentrales Thema bei SMI. Man setzt im technischen Bereich auf kontinuierliche Schulungen und Zertifizierungen. Nachhaltigkeit wird im Unternehmen ebenfalls großgeschrieben: Eine Solaranlage versorgt das Gebäude mit Strom für Heizung und Kühlung und schafft ein angenehmes Raumklima.</p>
+<p>Die Geschäftsführung lobte die gute Unterstützung durch Rat und Verwaltung beim Umzug an den neuen Standort. Die FWG Oelde zeigte sich beeindruckt von der professionellen Aufstellung des Unternehmens und wünschte SMI weiterhin viel Erfolg.</p>
+<div class="card reveal"><h3>Beim Besuch dabei</h3><p style="margin:0">Für die FWG: Thorsten Retzlaff, Bernhard Poppenberg, Thomas Populoh, Achim Hakenholt, Hubert Bleß, Manuela Steuer, Andreas Sumkötter, Ludger Lücke und Alexander Fertich. Für die SMI Service GmbH &amp; Co. KG: Benedikt Wallschlag, Maike Hiegemann und Nadine Schneider.</p></div>''')
+
+article("wahlkampf-wochenmarkt.html","FWG im Dialog auf dem Wochenmarkt","Die FWG im Gespräch mit den Bürgerinnen und Bürgern auf dem Oelder Wochenmarkt.","Wahlkampf 2025 · 24. August 2025","FWG im Dialog auf dem Wochenmarkt","Vertreterinnen und Vertreter der FWG waren auf dem Oelder Wochenmarkt präsent, um mit den Bürgerinnen und Bürgern ins Gespräch zu kommen.",
+ '''<p>Ziel der Aktion war der direkte Austausch über Themen, die die Menschen in Oelde bewegen, sowohl im Hinblick auf das, was bereits gut läuft, als auch auf Bereiche mit Verbesserungsbedarf.</p>
+<p>Ein zentrales Thema war die hohe Verschuldung der Stadt. Viele Marktbesucher äußerten Sorgen über die langfristige finanzielle Entwicklung Oeldes. Die FWG stellte in diesem Zusammenhang eigene Vorschläge vor, wie die Schuldenspirale durchbrochen werden könnte, unter anderem durch sparsame, aber kreative Lösungen in der Stadtgestaltung. So sprach man sich beispielsweise für den Einsatz von Wasserspendern als nützliche Gestaltungselemente im Stadtbild aus, anstelle teurer künstlicher Wasserläufe.</p>
+<p>Auch der Erhalt der Hochbeete in der Fußgängerzone wurde thematisiert. Diese tragen aus Sicht der FWG nicht nur zur Aufenthaltsqualität bei, sondern fördern auch das Stadtgrün und das Klima in der Innenstadt. Schlecht für die Innenstadt ist der Leerstand von Immobilien, vor allem wenn sie zentral gelegen sind und verfallen. Kritisch wurde auch der schlechte Zustand der Geiststraße (vor Rossmann) gesehen, die für Auto und Radfahrer bereits seit langem schwer zu befahren ist.</p>
+<p>Ein weiteres wichtiges Anliegen war bezahlbarer Wohnraum. Die Gesprächspartner waren sich einig, dass hier dringend Handlungsbedarf besteht. Das Thema Bürgernähe kam ebenfalls zur Sprache. Sprechstunden im Rathaus für alle Bürgergruppen, ein FWG-Anliegen, fanden viele gut; die Forderung nach digitaler Übertragung der Rats- und Ausschusssitzungen fand ebenfalls Zustimmung. Neben diesen Schwerpunktthemen wurden viele weitere Fragen und Ideen offen und engagiert diskutiert.</p>
+<p>Die FWG zeigte sich erfreut über das große Interesse und die konstruktiven Gespräche. Der direkte Kontakt mit den Menschen vor Ort bleibt für sie ein zentraler Bestandteil ihrer politischen Arbeit.</p>
+<p><b>Weitere Gesprächsangebote</b> auf dem Wochenmarkt in Oelde, in den Ortsteilen und am Telefon folgen.</p>''')
+
+article("wahlkampf-wahlaufruf.html","Wahlaufruf","Die FWG Oelde bittet alle Bürgerinnen und Bürger, an der Kommunalwahl am 14. September teilzunehmen.","Wahlkampf 2025 · 27. August 2025","Engagement in Oelde: Gehen Sie wählen!","Die FWG Oelde bittet alle Bürgerinnen und Bürger der Stadt, an der Kommunalwahl am 14. September teilzunehmen. Demokratie braucht Engagement!",
+ '''<p>Nehmen Sie Ihr Recht auf Beteiligung wahr und gehen Sie bitte wählen.</p>
+<p class="quote" style="margin:1.5rem 0">Gehen Sie wählen, denn es ist Ihre Stadt.</p>
+<p>Unser Programm zur Wahl finden Sie unter <a href="programm.html">Programm</a>.</p>''')
+
 
 # ---------- Termine
 fm=[("🗣️","Bürgersprechstunden","Ratsmitglieder vor Ort in den Ortsteilen – sprechen Sie uns an."),("🛒","Infostand Wochenmarkt","Kommen Sie ins Gespräch, wir hören zu."),("📊","Haushaltsberatungen","Im November berät der Rat den Haushalt – wir berichten."),("🏢","Betriebsbesuche","Wir informieren uns vor Ort bei Unternehmen und Einrichtungen."),("📋","Mitgliederversammlung","Mindestens einmal im Jahr, Einladung mit zwei Wochen Frist."),("💶","Veranstaltung zu den Stadtfinanzen","Eine öffentliche Veranstaltung ist für den Herbst geplant.")]

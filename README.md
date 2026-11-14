@@ -26,3 +26,9 @@ Die Formulare auf `kontakt.html` und `mitmachen.html` senden per `fetch` an `api
 3. Beim Aufruf fragt der Browser nach Benutzername und Passwort. Der **Benutzername ist beliebig**, nur das Passwort wird geprüft.
 
 Ist `SITE_PASSWORD` nicht gesetzt, antwortet die Seite mit 503 und bleibt gesperrt. Zum Livegang die Middleware entfernen (Datei `middleware.js` löschen). `.vercelignore` schließt Build-Werkzeuge, `people.json`, README und das PHP-Formular vom Deployment aus; das PHP-Kontaktformular läuft auf Vercel nicht.
+
+## Kandidatenübersicht 2025 (versteckte Seite)
+
+`kandidaten-2025.html` erscheint **nicht** in Navigation oder Footer und ist per `noindex` von Suchmaschinen ausgenommen. Erreichbar ist sie nur über die Karte „Wer hinter dem Programm steht“ am Ende des Abschnitts „Programm 2025“ auf `programm.html`.
+
+Die Inhalte kommen aus `candidates.json` (Stand 14.11.2026, Kernaussagen gekürzt, Themen von uns zugeordnet): Wahlbezirk, Name, Kernaussage, Themen, `gewaehlt` (true/false) und optional `photo` (Pfad zu einem Bild; aktuell noch leer). Einträge ohne Kernaussage werden mit einem Hinweis angezeigt. Nach dem Ändern `python3 build.py` ausführen.
