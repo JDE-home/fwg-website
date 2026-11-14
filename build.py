@@ -3,15 +3,22 @@ import json
 P = {p["id"]: p for p in json.load(open("people.json", encoding="utf-8"))}
 NAV = [("index.html","Start"),("ueber-uns.html","Über uns"),("ratsmitglieder.html","Unser Team"),("programm.html","Programm"),("aktuelles.html","Aktuelles"),("termine.html","Termine")]
 MOTTO = "Gemeinschaft fördern. Bürgernähe leben. Zukunft gestalten."
+CAND = json.load(open("candidates.json", encoding="utf-8"))
+cand_themes = sorted({t for c in CAND["kandidaten"] for t in c.get("themes", [])})
+cand_count = len(CAND["kandidaten"]); cand_won = sum(1 for c in CAND["kandidaten"] if c.get("gewaehlt"))
+# Seiten, die nicht in der Navigation auftauchen und nicht indexiert werden sollen
+NOINDEX = {"kandidaten-2025.html"}
+NAV_ACTIVE = {"kandidaten-2025.html": "programm.html"}  # welcher Menüpunkt dabei markiert wird
 
 def layout(fn, title, body, desc):
-    nav = "".join(f'<li><a href="{h}"{" aria-current=page" if h==fn else ""}>{t}</a></li>' for h,t in NAV)
+    active = NAV_ACTIVE.get(fn, fn)
+    nav = "".join(f'<li><a href="{h}"{" aria-current=page" if h==active else ""}>{t}</a></li>' for h,t in NAV)
     nav += f'<li><a class="cta" href="mitmachen.html"{" aria-current=page" if fn=="mitmachen.html" else ""}>Mitmachen</a></li>'
     logo = '<span class="logo"><img src="assets/img/logo.jpg" alt=""></span>'
     return f'''<!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title} – FWG Oelde</title><meta name="description" content="{desc}">
-<meta name="theme-color" content="#29488b">
+<meta name="theme-color" content="#29488b">{'<meta name="robots" content="noindex, nofollow">' if fn in NOINDEX else ""}
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -194,7 +201,8 @@ fin=[("2015","Ablehnung","no","Streit um die Grundsteuererhöhung; Haushalt von 
 ("2024","Ablehnung","no","Multifunktionshalle von 19,13 auf 22,8 Mio. € gestiegen, Wasserspiel im Kreisverkehr, zu optimistische Gewerbesteuerprognose."),
 ("2025","Zustimmung unter starken Vorbehalten","mid","Defizit von 12,36 Mio. €; Schulden steigen bis 2027 auf 73,73 Mio. €. „Planung muss dem Budget folgen.“")]
 pages["programm.html"] = ("Programm","Das Wahlprogramm 2025 der FWG Oelde und der Rückblick auf das Programm 2020: Finanzen, Bildung, Wirtschaft, Klima, Ortsteile.", hero("Programm 2025",MOTTO,"Unser Wahlprogramm zur Kommunalwahl vom 14. September 2025 – klar, machbar und finanzierbar.")+f'''
-<section><div class="container" style="max-width:860px">{"".join(f'<details id="{k}" class="reveal"{" open" if n==0 else ""}><summary><span>{i} {t}</span></summary><div><p>{d}</p>{ul(items)}</div></details>' for n,(k,i,t,d,items) in enumerate(topics))}</div></section>
+<section id="programm2025"><div class="container" style="max-width:860px">{"".join(f'<details id="{k}" class="reveal"{" open" if n==0 else ""}><summary><span>{i} {t}</span></summary><div><p>{d}</p>{ul(items)}</div></details>' for n,(k,i,t,d,items) in enumerate(topics))}
+<div class="card reveal" style="margin-top:2rem;display:flex;gap:1.2rem;align-items:center;justify-content:space-between;flex-wrap:wrap"><div><h3 style="margin:0 0 .3rem">Wer hinter dem Programm steht</h3><p style="margin:0">Unsere Kandidatinnen und Kandidaten aus allen {cand_count} Wahlbezirken und ihre Schwerpunkte.</p></div><a class="btn btn-dark" href="kandidaten-2025.html">Zur Kandidatenübersicht →</a></div></div></section>
 {prog2020_html}
 <section id="haushalt"><div class="container"><div class="section-head reveal"><span class="eyebrow">Haushalt im Fokus</span><h2>Wie die FWG zum Haushalt stimmt.</h2><p class="lead">Unsere Linie: generationengerechtes Kostenbewusstsein, Schuldenabbau, Transparenz. Zustimmen, wenn es trägt – ablehnen, wenn nicht.</p></div>
 <div class="table-wrap reveal"><table class="fin"><thead><tr><th>Jahr</th><th>Votum</th><th>Begründung</th></tr></thead><tbody>{"".join(f'<tr><td><b>{y}</b></td><td><span class="pill {c}">{v}</span></td><td>{t}</td></tr>' for y,v,c,t in fin)}</tbody></table></div></div></section>
@@ -243,6 +251,25 @@ pages["marienhospital-2026.html"] = ("Marienhospital","Die FWG Oelde zur Schlie�
 <div class="card reveal"><h3>Quellen</h3><ul class="checks"><li><a href="https://www.oelde.de/de/rathaus/veroeffentlichungen/gut-zu-wissen/gemeinsame-stellungnahme-der-fraktionen-und-von-buergermeisterin-karin-rodeheger/" target="_blank" rel="noopener">Gemeinsame Stellungnahme der Fraktionen und der Bürgermeisterin (Stadt Oelde)</a></li><li><a href="https://www.die-glocke.de/kreis-warendorf/oelde/artikel/marienhospital-oelde-bekenntnis-zum-standort-reicht-nicht-1786288223" target="_blank" rel="noopener">„Bekenntnis zum Standort reicht nicht“ (Die Glocke)</a></li><li><a href="https://www.bibliomedmanager.de/news/marienhospital-oelde-schliessung-medizinische-versorgung" target="_blank" rel="noopener">Stadt fordert Versorgungskonzept (bibliomedmanager.de)</a></li></ul></div>
 <p style="margin-top:1.5rem"><a class="btn btn-dark" href="aktuelles.html">← Alle Beiträge</a></p>
 </div></div></section>''')
+
+# ---------- Rückblick: Kandidaten 2025 (nur über das Programm erreichbar)
+def cand_card(c):
+    n = c["wahlbezirk"]
+    badge = '<span class="cand-won">In den Rat gewählt</span>' if c.get("gewaehlt") else ""
+    media = f'<img src="{c["photo"]}" alt="Foto {c["name"]}">' if c.get("photo") else f'<span class="cand-num" aria-hidden="true">{n}</span>'
+    pills = "".join(f'<span class="pill info">{t}</span>' for t in c.get("themes", []))
+    text = c["statement"] if c.get("statement") else '<em class="muted">Zu diesem Wahlbezirk liegt keine Kernaussage vor.</em>'
+    data = " ".join(c.get("themes", []))
+    return f'<article class="cand reveal" data-themes="{data}"><div class="cand-media">{media}<span class="cand-wb">Wahlbezirk {n}</span>{badge}</div><div class="cand-body"><h3>{c["name"]}</h3><p>{text}</p><div class="cand-pills">{pills}</div></div></article>'
+pages["kandidaten-2025.html"] = ("Kandidaten 2025","Rückblick: Die Kandidatinnen und Kandidaten der FWG Oelde zur Kommunalwahl 2025.", hero("Rückblick · Kommunalwahl "+CAND["wahltag"],"Unsere Kandidatinnen und Kandidaten 2025",f"{cand_count} Wahlbezirke, {cand_count} Kandidaturen: Wer für die FWG angetreten ist und wofür die Einzelnen standen.")+f'''
+<section><div class="container">
+<p><a href="programm.html#programm2025">← Zurück zum Programm 2025</a></p>
+<div class="stats stats3" style="margin-top:1rem"><div class="stat"><b>{cand_count}</b><span>Wahlbezirke</span></div><div class="stat"><b>{cand_won}</b><span>Mandate im Stadtrat</span></div><div class="stat"><b>{len(cand_themes)}</b><span>Themenschwerpunkte</span></div></div>
+<div class="chips reveal" role="group" aria-label="Nach Thema filtern"><button class="chip on" data-filter="">Alle</button>{"".join(f'<button class="chip" data-filter="{t}">{t}</button>' for t in cand_themes)}</div>
+<div class="cands">{"".join(cand_card(c) for c in CAND["kandidaten"])}</div>
+<p class="note cand-empty" hidden>Zu diesem Thema gibt es keine Kandidaturen.</p>
+<p class="note">Rückblick auf die Kandidaturen zur Kommunalwahl am {CAND["wahltag"]}. Die Aussagen geben den Stand zum Wahlkampf wieder.</p>
+</div></section>''')
 
 # ---------- Termine
 fm=[("🗣️","Bürgersprechstunden","Ratsmitglieder vor Ort in den Ortsteilen – sprechen Sie uns an."),("🛒","Infostand Wochenmarkt","Kommen Sie ins Gespräch, wir hören zu."),("📊","Haushaltsberatungen","Im November berät der Rat den Haushalt – wir berichten."),("🏢","Betriebsbesuche","Wir informieren uns vor Ort bei Unternehmen und Einrichtungen."),("📋","Mitgliederversammlung","Mindestens einmal im Jahr, Einladung mit zwei Wochen Frist."),("💶","Veranstaltung zu den Stadtfinanzen","Eine öffentliche Veranstaltung ist für den Herbst geplant.")]

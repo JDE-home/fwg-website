@@ -1,0 +1,209 @@
+{
+ "_hinweis": "DUMMY-DATEN: Namen, Aussagen, Themen und die Markierung 'gewaehlt' durch echte Werte ersetzen.",
+ "wahltag": "14. September 2025",
+ "kandidaten": [
+  {
+   "wahlbezirk": 1,
+   "name": "Kandidat/in 1",
+   "statement": "Platzhaltertext für die Kernaussage im Wahlbezirk. Hier folgt später ein Satz zu den Schwerpunkten.",
+   "themes": [
+    "Finanzen",
+    "Bildung"
+   ],
+   "gewaehlt": true,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 2,
+   "name": "Kandidat/in 2",
+   "statement": "",
+   "themes": [],
+   "gewaehlt": false,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 3,
+   "name": "Kandidat/in 3",
+   "statement": "Platzhaltertext für eine kurze Kernaussage.",
+   "themes": [
+    "Bildung",
+    "Klima"
+   ],
+   "gewaehlt": false,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 4,
+   "name": "Kandidat/in 4",
+   "statement": "Platzhaltertext für die Kernaussage. Hier steht später die Aussage der Kandidatin oder des Kandidaten zu den Schwerpunkten im Wahlbezirk, zum Beispiel zu Finanzen, Wohnraum und Bildung. Dieser Text ist bewusst länger, um das Layout zu testen.",
+   "themes": [
+    "Wirtschaft",
+    "Wohnen"
+   ],
+   "gewaehlt": false,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 5,
+   "name": "Kandidat/in 5",
+   "statement": "Platzhaltertext für die Kernaussage im Wahlbezirk. Hier folgt später ein Satz zu den Schwerpunkten.",
+   "themes": [
+    "Ortsteile",
+    "Wirtschaft"
+   ],
+   "gewaehlt": true,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 6,
+   "name": "Kandidat/in 6",
+   "statement": "Platzhaltertext für eine kurze Kernaussage.",
+   "themes": [
+    "Bürgerbeteiligung",
+    "Finanzen"
+   ],
+   "gewaehlt": false,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 7,
+   "name": "Kandidat/in 7",
+   "statement": "Platzhaltertext für die Kernaussage im Wahlbezirk. Hier folgt später ein Satz zu den Schwerpunkten.",
+   "themes": [
+    "Klima",
+    "Finanzen"
+   ],
+   "gewaehlt": false,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 8,
+   "name": "Kandidat/in 8",
+   "statement": "Platzhaltertext für die Kernaussage. Hier steht später die Aussage der Kandidatin oder des Kandidaten zu den Schwerpunkten im Wahlbezirk, zum Beispiel zu Finanzen, Wohnraum und Bildung. Dieser Text ist bewusst länger, um das Layout zu testen.",
+   "themes": [
+    "Finanzen",
+    "Bildung"
+   ],
+   "gewaehlt": false,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 9,
+   "name": "Kandidat/in 9",
+   "statement": "Platzhaltertext für eine kurze Kernaussage.",
+   "themes": [
+    "Wohnen",
+    "Ortsteile"
+   ],
+   "gewaehlt": true,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 10,
+   "name": "Kandidat/in 10",
+   "statement": "Platzhaltertext für die Kernaussage im Wahlbezirk. Hier folgt später ein Satz zu den Schwerpunkten.",
+   "themes": [
+    "Bildung",
+    "Klima"
+   ],
+   "gewaehlt": false,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 11,
+   "name": "Kandidat/in 11",
+   "statement": "Platzhaltertext für die Kernaussage im Wahlbezirk. Hier folgt später ein Satz zu den Schwerpunkten.",
+   "themes": [
+    "Wirtschaft",
+    "Wohnen"
+   ],
+   "gewaehlt": false,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 12,
+   "name": "Kandidat/in 12",
+   "statement": "Platzhaltertext für die Kernaussage. Hier steht später die Aussage der Kandidatin oder des Kandidaten zu den Schwerpunkten im Wahlbezirk, zum Beispiel zu Finanzen, Wohnraum und Bildung. Dieser Text ist bewusst länger, um das Layout zu testen.",
+   "themes": [
+    "Ortsteile",
+    "Wirtschaft"
+   ],
+   "gewaehlt": false,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 13,
+   "name": "Kandidat/in 13",
+   "statement": "Platzhaltertext für die Kernaussage im Wahlbezirk. Hier folgt später ein Satz zu den Schwerpunkten.",
+   "themes": [
+    "Bürgerbeteiligung",
+    "Finanzen"
+   ],
+   "gewaehlt": true,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 14,
+   "name": "Kandidat/in 14",
+   "statement": "Platzhaltertext für die Kernaussage im Wahlbezirk. Hier folgt später ein Satz zu den Schwerpunkten.",
+   "themes": [
+    "Klima",
+    "Finanzen"
+   ],
+   "gewaehlt": false,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 15,
+   "name": "Kandidat/in 15",
+   "statement": "Platzhaltertext für eine kurze Kernaussage.",
+   "themes": [
+    "Finanzen",
+    "Bildung"
+   ],
+   "gewaehlt": false,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 16,
+   "name": "Kandidat/in 16",
+   "statement": "Platzhaltertext für die Kernaussage. Hier steht später die Aussage der Kandidatin oder des Kandidaten zu den Schwerpunkten im Wahlbezirk, zum Beispiel zu Finanzen, Wohnraum und Bildung. Dieser Text ist bewusst länger, um das Layout zu testen.",
+   "themes": [
+    "Wohnen",
+    "Ortsteile"
+   ],
+   "gewaehlt": false,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 17,
+   "name": "Kandidat/in 17",
+   "statement": "",
+   "themes": [],
+   "gewaehlt": false,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 18,
+   "name": "Kandidat/in 18",
+   "statement": "Platzhaltertext für eine kurze Kernaussage.",
+   "themes": [
+    "Wirtschaft",
+    "Wohnen"
+   ],
+   "gewaehlt": true,
+   "photo": ""
+  },
+  {
+   "wahlbezirk": 19,
+   "name": "Kandidat/in 19",
+   "statement": "Platzhaltertext für die Kernaussage im Wahlbezirk. Hier folgt später ein Satz zu den Schwerpunkten.",
+   "themes": [
+    "Ortsteile",
+    "Wirtschaft"
+   ],
+   "gewaehlt": false,
+   "photo": ""
+  }
+ ]
+}

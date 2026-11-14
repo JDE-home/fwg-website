@@ -22,3 +22,14 @@ document.querySelectorAll('form[data-contact]').forEach(f=>{
     btn.disabled=false;btn.textContent=label;
   });
 });
+// Kandidatenübersicht: Filter nach Thema
+document.querySelectorAll('.chips').forEach(box=>{
+  const cards=[...document.querySelectorAll('.cand')],empty=document.querySelector('.cand-empty');
+  box.addEventListener('click',e=>{
+    const b=e.target.closest('.chip');if(!b)return;
+    box.querySelectorAll('.chip').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)});
+    const t=b.dataset.filter;let n=0;
+    cards.forEach(c=>{const show=!t||c.dataset.themes.split(' ').includes(t);c.hidden=!show;if(show)n++});
+    if(empty)empty.hidden=n>0;
+  });
+});
