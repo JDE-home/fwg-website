@@ -78,12 +78,19 @@ VORSTAND = [dict(P[i], tag="Vorstand", role=r, bio=b) for i,r,b in [
  ("hakenholt","Stellv. Vorsitzender","Beisitzer, jetzt stellvertretender Vorsitzender. Sachkundiger Bürger aus Lette."),
  ("fertich","Kassierer","Verwaltet die Vereinsfinanzen. Sachkundiger Bürger für Schule, Kultur und Sport."),
  ("soldat","Schriftführer","Führt das Protokoll des Vereins.")]]
+def post_card(d,e,c,t,x,k,l):
+    more = f'<a class="more" href="{l}">Bericht lesen →</a>' if l else ""
+    return f'<article class="card news reveal"><div class="thumb {c}">{e}</div><span class="meta">{d} · <b>{k}</b></span><h3>{t}</h3><p>{x}</p>{more}</article>'
+def news_card(d,e,c,t,x,l):
+    href = l or "aktuelles.html"; label = "Bericht lesen" if l else "Alle Beiträge"
+    return f'<article class="card news reveal"><div class="thumb {c}">{e}</div><span class="meta">{d}</span><h3>{t}</h3><p>{x}</p><a class="more" href="{href}">{label} →</a></article>'
+
 pages = {}
 # ---------- Start
 home_cards = "".join(card(i,t,d,f"programm.html#{k}") for k,i,t,d,_ in [topics[1],topics[2],topics[3],topics[6],topics[5],topics[0]])
-news = [("Juli 2026","🗳️","t2","Jahreshauptversammlung in Lette","Bernhard Poppenberg wird einstimmig zum neuen Vorsitzenden gewählt – Friedhelm Hoberg gibt nach knapp 17 Jahren ab."),
-("Haushalt 2026","🎤","t1","Letzte Haushaltsrede","Unser Fraktionsvorsitzender Thorsten Retzlaff hat für die FWG zum städtischen Haushalt Stellung genommen."),
-("November 2026","📊","t3","Haushaltsberatungen","Unser Bericht über die Beratungen folgt im November.")]
+news = [("Juli 2026","🗳️","t2","Neuer Vorsitzender gewählt","Bernhard Poppenberg wird einstimmig zum neuen Vorsitzenden gewählt – Friedhelm Hoberg gibt nach knapp 17 Jahren ab.","jahreshauptversammlung-2026.html"),
+("Haushalt 2026","🎤","t1","Letzte Haushaltsrede","Unser Fraktionsvorsitzender Thorsten Retzlaff hat für die FWG zum städtischen Haushalt Stellung genommen.",""),
+("November 2026","📊","t3","Haushaltsberatungen","Unser Bericht über die Beratungen folgt im November.","")]
 pages["index.html"] = ("Start","Die Freie Wählergemeinschaft Oelde: unabhängig, überparteilich und bürgernah – seit 1994 im Stadtrat.", f'''
 <div class="hero"><span class="blob b1"></span><span class="blob b2"></span><div class="container hero-grid">
 <div><span class="eyebrow">Freie Wählergemeinschaft · seit 1994</span>
@@ -99,7 +106,7 @@ pages["index.html"] = ("Start","Die Freie Wählergemeinschaft Oelde: unabhängig
 <section><div class="container"><div class="split"><div class="reveal"><span class="eyebrow">Unser Team</span><h2>Gesichter, die Sie kennen.</h2><p class="lead">Fünf Ratsmitglieder und viele sachkundige Bürgerinnen und Bürger aus allen Ortsteilen – Nachbarn, Unternehmer, Eltern, Vereinsmenschen.</p><a class="btn btn-dark" href="ratsmitglieder.html">Alle ansehen →</a></div>
 <div class="grid" style="grid-template-columns:repeat(2,1fr)">{person(P["retzlaff"])}{person(P["knop"])}</div></div></div></section>
 <section class="alt"><div class="container"><div class="section-head reveal"><span class="eyebrow">Aktuelles</span><h2>Was uns gerade bewegt.</h2></div><div class="grid g3">
-{"".join(f'<article class="card news reveal"><div class="thumb {c}">{e}</div><span class="meta">{d}</span><h3>{t}</h3><p>{x}</p><a class="more" href="aktuelles.html">Alle Beiträge →</a></article>' for d,e,c,t,x in news)}</div></div></section>
+{"".join(news_card(*n) for n in news)}</div></div></section>
 {band("Oelde gestalten – gemeinsam.","Mitglied werden, mitreden, unterstützen: Wir freuen uns auf Sie.","mitmachen.html","Jetzt mitmachen")}''')
 
 # ---------- Über uns
@@ -148,11 +155,32 @@ pages["programm.html"] = ("Programm","Das Wahlprogramm 2025 der FWG Oelde: Gemei
 {band("Ihre Idee fehlt?","Sagen Sie uns, was Oelde braucht – wir nehmen es mit in den Rat.","kontakt.html","Kontakt aufnehmen")}''')
 
 # ---------- Aktuelles
-posts=[("November 2026","📊","t3","Bericht: Haushaltsberatungen","Wir berichten über die Haushaltsberatungen im Rat – der Bericht folgt im November.","Folgt"),
-("Haushalt 2026","🎤","t1","Haushaltsrede von Thorsten Retzlaff","Die letzte Haushaltsrede unseres Fraktionsvorsitzenden Thorsten Retzlaff. Der Rat verabschiedete den Etat 2026 mit den Stimmen von CDU, FWG, FDP, Volt und Linken. Die Rede im Wortlaut wird hier veröffentlicht.","Rede"),
-("Juli 2026","🗳️","t2","Jahreshauptversammlung in Lette","Bei der ordentlichen Mitgliederversammlung im Sportlerheim Lette wählte die FWG Bernhard Poppenberg einstimmig zum neuen 1. Vorsitzenden. Er folgt auf Friedhelm Hoberg, der nach knapp 17 Jahren an der Spitze nicht erneut antrat. Neuer stellvertretender Vorsitzender ist Achim Hakenholt, Kassierer Alexander Fertich, Schriftführer Wolf-Rüdiger Soldat.","Bericht")]
+posts=[("November 2026","📊","t3","Bericht: Haushaltsberatungen","Wir berichten über die Haushaltsberatungen im Rat – der Bericht folgt im November.","Folgt",""),
+("Haushalt 2026","🎤","t1","Haushaltsrede von Thorsten Retzlaff","Die letzte Haushaltsrede unseres Fraktionsvorsitzenden Thorsten Retzlaff. Der Rat verabschiedete den Etat 2026 mit den Stimmen von CDU, FWG, FDP, Volt und Linken. Die Rede im Wortlaut wird hier veröffentlicht.","Rede",""),
+("Juli 2026","🗳️","t2","FWG wählt Bernhard Poppenberg zum neuen Vorsitzenden","Nach fast 17 Jahren gibt Friedhelm Hoberg den Vorsitz ab. Bei der Mitgliederversammlung im Sportlerheim Lette wurde Bernhard Poppenberg einstimmig zum Nachfolger gewählt. Dazu Berichte aus Kreistag und Rat und große Sorgen um die Stadtfinanzen.","Bericht","jahreshauptversammlung-2026.html")]
 pages["aktuelles.html"] = ("Aktuelles","Neuigkeiten, Besuche und Positionen der FWG Oelde.", hero("Aktuelles 2026","Neuigkeiten aus Oelde.","Berichte und Positionen der FWG aus dem laufenden Jahr.")+f'''
-<section><div class="container"><div class="grid g3">{"".join(f'<article class="card news reveal"><div class="thumb {c}">{e}</div><span class="meta">{d} · <b>{k}</b></span><h3>{t}</h3><p>{x}</p></article>' for d,e,c,t,x,k in posts)}</div></div></section>''')
+<section><div class="container"><div class="grid g3">{"".join(post_card(*p) for p in posts)}</div></div></section>''')
+
+# ---------- Artikel: Jahreshauptversammlung 2026
+pages["jahreshauptversammlung-2026.html"] = ("Neuer Vorsitzender","FWG wählt Bernhard Poppenberg zum neuen Vorsitzenden: Bericht von der Mitgliederversammlung in Lette.", hero("Aktuelles · Juli 2026","FWG wählt Bernhard Poppenberg zum neuen Vorsitzenden","Mitgliederversammlung im Sportlerheim Lette: Friedhelm Hoberg gibt nach fast 17 Jahren den Vorsitz ab.")+f'''
+<section><div class="container article">
+<figure class="photo reveal"><img src="assets/img/news/gruppe.jpg" alt="Gruppenfoto der Teilnehmenden der Mitgliederversammlung vor dem Sportlerheim Lette" width="1400" height="1050"><figcaption>Erste Reihe, 4. v. r.: Bernhard Poppenberg, daneben Dorothea Nienkemper.</figcaption></figure>
+<div class="prose">
+<p class="lead">Bei der ordentlichen Mitgliederversammlung im Sportlerheim Lette hat die FWG Oelde die Weichen neu gestellt: Nach fast 17 Jahren an der Spitze gab Friedhelm Hoberg den Vorsitz ab. Sein Nachfolger ist Bernhard Poppenberg.</p>
+<h2>Berichte aus Kreis und Rat</h2>
+<p><b>Kreistag:</b> Fraktionsvorsitzende Dorothea Nienkemper berichtete vom Streit mit den Krankenkassen um die Finanzierung von Fehlfahrten der Krankenwagen und vom Ausbau des Bevölkerungsschutzes. Mit den Anträgen anderer Fraktionen setze man sich im Kreishaus sachlich und konstruktiv auseinander. Von der AfD sei bislang kein einziger Antrag zur Beratung vorgelegt worden.</p>
+<p><b>Rückblick:</b> Friedhelm Hoberg blickte auf die Kommunalwahl 2025 zurück. Obwohl drei neue Parteien in den Rat eingezogen sind, sei man mit dem Ergebnis zufrieden: Die FWG-Fraktion bleibt mit fünf Mitgliedern vertreten. Er lobte die hervorragende Zusammenarbeit von Vorstand und Fraktion.</p>
+<p><b>Ratsarbeit:</b> Fraktionsvorsitzender Thorsten Retzlaff betonte, dass die Flut an Anträgen die Arbeit für jedes Ratsmitglied extrem aufwendig mache, und dankte seinem Team und den Unterstützern im Hintergrund. Mit 50 Mitgliedern sei der Stadtrat im Verhältnis zur Einwohnerzahl zu groß.</p>
+<h2>Sorge um die Stadtfinanzen</h2>
+<p>Die Haushaltslage sei extrem angespannt, für das laufende Jahr plane die Stadt erneut mit einem deutlichen Defizit. Die Rücklagen, das „Sparkonto für schlechte Zeiten“, seien bald fast aufgebraucht. Vom „Masterplan Finanzen“ ist die FWG bisher wenig überzeugt. Aus der Versammlung kam der Wunsch nach einer <b>öffentlichen Veranstaltung zu den städtischen Finanzen</b> im Herbst, zu der alle interessierten Bürgerinnen und Bürger eingeladen werden sollen.</p>
+<h2>Abschied und Neuwahl</h2>
+<p>Friedhelm Hoberg bedankte sich bei seinen Mitstreitern für den langjährigen, vertrauensvollen Weg. Karl-Friedrich Knop würdigte im Namen der FWG sein außerordentliches Engagement. Beide waren sich einig: Gerade heute sei es wichtiger denn je, die Demokratie vor Ort durch bürgernahe und sachorientierte Politik zu stärken.</p>
+<figure class="photo reveal"><img src="assets/img/news/dank-hoberg.jpg" alt="Drei Personen vor dem Tennisplatz, eine hält einen Blumenstrauß, eine ein Geschenk" width="1400" height="1050" loading="lazy"><figcaption>Karl-Friedrich Knop bedankt sich bei Friedhelm und Inge Hoberg.</figcaption></figure>
+<p>Bei den anschließenden Neuwahlen wurde der kommunalpolitisch erfahrene Bernhard Poppenberg <b>einstimmig</b> zum neuen 1. Vorsitzenden gewählt. Er bedankte sich für das Vertrauen und freue sich sehr auf die neue Aufgabe.</p>
+<div class="card reveal"><h3>Der neue Vorstand</h3><ul class="mini-list"><li>Bernhard Poppenberg<small>Vorsitzender</small></li><li>Achim Hakenholt<small>Stellv. Vorsitzender</small></li><li>Alexander Fertich<small>Kassierer</small></li><li>Wolf-Rüdiger Soldat<small>Schriftführer</small></li><li>Hubert Bleß<small>Beisitzer</small></li><li>Friedhelm Hoberg<small>Beisitzer</small></li><li>Ludger Lücke<small>Beisitzer</small></li><li>Thomas Populoh<small>Beisitzer</small></li><li>Thorsten Retzlaff<small>Beisitzer</small></li><li>Manuela Steuer<small>Beisitzerin</small></li><li>Harald Herklotz<small>Beisitzer</small></li></ul></div>
+<p style="margin-top:1.5rem">Im Anschluss an den offiziellen Teil klang der Abend bei Grillwurst und kühlen Getränken aus. Organisiert wurde dieser Teil von Achim Hakenholt und Thomas Populoh, denen die Versammlung ein großes Lob aussprach.</p>
+<p><a class="btn btn-dark" href="aktuelles.html">← Alle Beiträge</a></p>
+</div></div></section>''')
 
 # ---------- Termine
 fm=[("🗣️","Bürgersprechstunden","Ratsmitglieder vor Ort in den Ortsteilen – sprechen Sie uns an."),("🛒","Infostand Wochenmarkt","Kommen Sie ins Gespräch, wir hören zu."),("📊","Haushaltsberatungen","Im November berät der Rat den Haushalt – wir berichten."),("🏢","Betriebsbesuche","Wir informieren uns vor Ort bei Unternehmen und Einrichtungen."),("📋","Mitgliederversammlung","Mindestens einmal im Jahr, Einladung mit zwei Wochen Frist."),("💶","Veranstaltung zu den Stadtfinanzen","Eine öffentliche Veranstaltung ist für den Herbst geplant.")]
