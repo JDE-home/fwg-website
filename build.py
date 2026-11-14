@@ -85,6 +85,51 @@ def news_card(d,e,c,t,x,l):
     href = l or "aktuelles.html"; label = "Bericht lesen" if l else "Alle Beiträge"
     return f'<article class="card news reveal"><div class="thumb {c}">{e}</div><span class="meta">{d}</span><h3>{t}</h3><p>{x}</p><a class="more" href="{href}">{label} →</a></article>'
 
+
+# ---------- Programm 2020 (Rückblick)
+prog2020 = [
+ ("p20-finanzen","💶","Solide Finanzen",["Erfolgreichen Weg der Entschuldung nach der Corona-Krise fortsetzen","Beteiligungen wie die Stadtwerke Ostmünsterland erhalten","Gebühren und Steuern so niedrig wie möglich halten"]),
+ ("p20-wirtschaft","🏭","Wirtschaftsförderung",["Gewerbegebiet A2 schrittweise entwickeln","Erweiterung des Gewerbegebiets AUREA kritisch prüfen","Niedrige Hebesätze als Anreiz für Unternehmen erhalten","Mietwohnungsbau, damit Beschäftigte der Oelder Betriebe vor Ort bleiben können"]),
+ ("p20-schulen","🎒","Schulen und Kitas",["Bedarfsgerechter Ausbau der Offenen Ganztagsschulen (OGS) an den Grundschulen","Sanierungsstau an den Grundschulen abbauen","Mehr Digitalisierung im Primarbereich"]),
+ ("p20-klima","🌳","Klimaschutz und Klimaanpassung",["Ausbau des Radverkehrs","Flächensparendes Bauen durch konsequente Nachverdichtung","Intelligente Regenwasserrückhaltung","Ausbau der Solarenergienutzung","Nachhaltigkeitsstandards in den Bebauungsplänen","Sanierungskonzepte für den Gebäudebestand"]),
+ ("p20-energie","☀️","Regenerative Energie",["Ausbau regenerativer Energie für öffentliche Gebäude","Die Förderung privater Haushalte dabei nicht aus dem Blick verlieren"]),
+ ("p20-ortsteile","🏘️","Lebenswerte Ortsteile",["Vorhandene Kindergärten und Schulen in Lette, Stromberg und Sünninghausen unbedingt erhalten","Sportvereine bei ihren Anlagen unterstützen","Bessere Anbindung durch den ÖPNV"]),
+ ("p20-hausarzt","🩺","Hausärztliche Versorgung",["Maßnahmenpaket gegen eine drohende Unterversorgung, denn viele niedergelassene Oelder Allgemeinmediziner sind bereits älter","Standortvorteile Oeldes bei der Anwerbung medizinischen Personals offensiver kommunizieren"]),
+ ("p20-weitere","🧭","Weitere Themen",["Leben und Wohnen im Alter","Städtepartnerschaft in Europa"]),
+]
+done2020 = [
+ ("2017 → 2021","Erreicht","ok","Ökostrom für städtische Gebäude: von der FWG 2017 gefordert, ab 2021 zu 100 % umgesetzt."),
+ ("2019","Haltung","info","Stellungnahme gegen die AUREA-Erweiterung: hoher Flächenverbrauch, wenig Gewerbesteuer, leerer Arbeitsmarkt."),
+ ("Mai 2020","Antrag","act","Antrag „Seebrücke – sicherer Hafen“ im Rat der Stadt."),
+ ("Wahlkampf 2020","Aktion","info","Notfalldosen statt Werbegeschenken, die Telefonaktion „FWG im Dialog“ und die Laufaktion „FWG informiert laufend“; dazu Betriebsbesuche, etwa im Autohaus Schlüter + Weinekötter und bei Verhoff’s Tierfachmarkt."),
+ ("Haushalt 2020","Zustimmung","ok","Die FWG stimmt dem Haushalt 2020 zu, ohne dass die Hebesätze steigen. Investiert werden rund 35 Mio. €, vor allem in Schulen. Die AUREA-Erweiterung lehnt die FWG ab."),
+ ("Haushalt 2020","Antrag","act","Anträge: Busse zu den Stadtfesten, Klimaprojekt-Budgets für Schulen, mehr Fahrradstellplätze, ein „Tag der offenen Tür in der Verwaltung“ und das Pflegeprojekt in Lette."),
+ ("November 2020","Fraktion","info","Neue Fraktionsspitze mit Wolfgang Bovekamp als Vorsitzendem und Manuela Steuer als Stellvertreterin. Die Fraktion hat damals sechs Ratsmitglieder."),
+ ("Haushalt 2021","Antrag","act","Anträge: Lastenradprämie für Privatpersonen (10.000 €), mobiles Grün auf dem Marktplatz (10.000 €) und Mittel für die Städtepartnerschaft (5.000 €)."),
+ ("Haushalt 2023","Antrag","act","Mehr Geld für Photovoltaik (von 100.000 auf 300.000 €), Ziel Klimaneutralität 2035 und ein gemeinsamer Antrag mit SPD und Grünen zum städtischen Wohnungsbau."),
+]
+changes = [
+ ("Finanzen","Entschuldung nach Corona fortsetzen, Beteiligungen wie die Stadtwerke erhalten","Schuldenabbau, Investitionen nur mit Kosten-Nutzen-Bewertung, keine Prestigeprojekte","Schärfer","mid"),
+ ("Wirtschaft","Gewerbegebiet A2 entwickeln, AUREA-Erweiterung prüfen","Citymanagement, Leerstände abbauen, Raum für Handwerk und Kleingewerbe","Neu gewichtet","info"),
+ ("Bildung","OGS-Ausbau, Sanierungsstau, Digitalisierung","Wohnortnahe Kitaplätze, mehr Schulsozialarbeit, Unterstützung der VHS","Neu gewichtet","info"),
+ ("Klima","Klimaschutz, Solarenergie, Nachhaltigkeitsstandards in Bebauungsplänen","Konkreter Hochwasser- und Hitzeschutz, Radwege, Fahrradstellplätze","Konkreter","info"),
+ ("Energie","Eigene Rubrik: regenerative Energie für öffentliche Gebäude","Keine eigene Rubrik mehr","Entfallen","no"),
+ ("Ortsteile","Kitas und Schulen erhalten, Sportvereine unterstützen","Zusätzlich Bauplätze, Straßen, Rad- und Wirtschaftswege","Fortgeführt","ok"),
+ ("Gesundheit und Alter","Hausärztliche Versorgung, Leben und Wohnen im Alter","Seniorenarbeit unter „Gemeinschaft“, kein eigener Gesundheitspunkt","Entfallen","no"),
+ ("Beteiligung","–","Livestream der Sitzungen, Jugendparlament, Bürgersprechstunden, digitale Services","Neu","ok"),
+ ("Wohnen und Stadt","Mietwohnungsbau für Beschäftigte","Bezahlbarer, barrierefreier Wohnraum, Geiststraße, Gläserne Küche","Erweitert","info"),
+ ("Europa","Städtepartnerschaft in Europa","Nicht mehr im Programm","Entfallen","no"),
+]
+prog2020_html = f'''<section class="alt" id="programm2020"><div class="container">
+<div class="section-head reveal"><span class="eyebrow">Rückblick</span><h2>Programm 2020: Was wir uns vorgenommen und was wir getan haben.</h2><p class="lead">Zur Kommunalwahl am 13. September 2020 trat die FWG mit acht Schwerpunkten an. Hier steht, was im Programm stand und was daraus in Rat und Wahlkampf wurde.</p></div>
+<div class="split" style="align-items:start;gap:2.2rem">
+<div><h3 class="reveal" style="margin-bottom:1rem">Das Programm 2020</h3>{"".join(f'<details id="{k}" class="reveal"><summary><span>{i} {t}</span></summary><div>{ul(items)}</div></details>' for k,i,t,items in prog2020)}</div>
+<div><h3 class="reveal" style="margin-bottom:1rem">Was daraus wurde</h3><div class="timeline">{"".join(f'<div class="item reveal"><b>{y}</b> <span class="pill {c}">{k}</span><p>{t}</p></div>' for y,k,c,t in done2020)}</div></div></div>
+<div class="section-head reveal" style="margin-top:3.5rem"><h3>Was sich 2025 geändert hat</h3><p class="lead" style="font-size:1.05rem">Unsere Einordnung nach einem Vergleich der beiden Programmtexte: Die Finanzen stehen schärfer im Mittelpunkt, Bürgernähe ist neu, einige Themen sind entfallen.</p></div>
+<div class="table-wrap reveal"><table class="fin stack"><thead><tr><th>Thema</th><th>2020</th><th>2025</th><th>Änderung</th></tr></thead><tbody>{"".join(f'<tr><td data-label="Thema"><b>{a}</b></td><td data-label="2020">{b}</td><td data-label="2025">{c}</td><td data-label="Änderung"><span class="pill {p}">{k}</span></td></tr>' for a,b,c,k,p in changes)}</tbody></table></div>
+<p class="note">Zusammengestellt aus den veröffentlichten Programmtexten und Haushaltsreden der FWG. „Leben und Wohnen im Alter“ und „Städtepartnerschaft“ sind nur als Überschrift bekannt. Bitte mit dem Wahlprogramm-Flyer von 2020 abgleichen.</p>
+</div></section>'''
+
 pages = {}
 # ---------- Start
 home_cards = "".join(card(i,t,d,f"programm.html#{k}") for k,i,t,d,_ in [topics[1],topics[2],topics[3],topics[6],topics[5],topics[0]])
@@ -148,9 +193,10 @@ fin=[("2015","Ablehnung","no","Streit um die Grundsteuererhöhung; Haushalt von 
 ("2023","Zustimmung","ok","Priorisierung und Transparenz; Wohnungsbau-Antrag mit SPD und Grünen; PV-Mittel von 100.000 auf 300.000 €."),
 ("2024","Ablehnung","no","Multifunktionshalle von 19,13 auf 22,8 Mio. € gestiegen, Wasserspiel im Kreisverkehr, zu optimistische Gewerbesteuerprognose."),
 ("2025","Zustimmung unter starken Vorbehalten","mid","Defizit von 12,36 Mio. €; Schulden steigen bis 2027 auf 73,73 Mio. €. „Planung muss dem Budget folgen.“")]
-pages["programm.html"] = ("Programm","Das Wahlprogramm 2025 der FWG Oelde: Gemeinschaft, Finanzen, Bildung, Wirtschaft, Klima, Ortsteile.", hero("Programm 2025",MOTTO,"Unser Wahlprogramm zur Kommunalwahl vom 14. September 2025 – klar, machbar und finanzierbar.")+f'''
+pages["programm.html"] = ("Programm","Das Wahlprogramm 2025 der FWG Oelde und der Rückblick auf das Programm 2020: Finanzen, Bildung, Wirtschaft, Klima, Ortsteile.", hero("Programm 2025",MOTTO,"Unser Wahlprogramm zur Kommunalwahl vom 14. September 2025 – klar, machbar und finanzierbar.")+f'''
 <section><div class="container" style="max-width:860px">{"".join(f'<details id="{k}" class="reveal"{" open" if n==0 else ""}><summary><span>{i} {t}</span></summary><div><p>{d}</p>{ul(items)}</div></details>' for n,(k,i,t,d,items) in enumerate(topics))}</div></section>
-<section class="alt" id="haushalt"><div class="container"><div class="section-head reveal"><span class="eyebrow">Haushalt im Fokus</span><h2>Wie die FWG zum Haushalt stimmt.</h2><p class="lead">Unsere Linie: generationengerechtes Kostenbewusstsein, Schuldenabbau, Transparenz. Zustimmen, wenn es trägt – ablehnen, wenn nicht.</p></div>
+{prog2020_html}
+<section id="haushalt"><div class="container"><div class="section-head reveal"><span class="eyebrow">Haushalt im Fokus</span><h2>Wie die FWG zum Haushalt stimmt.</h2><p class="lead">Unsere Linie: generationengerechtes Kostenbewusstsein, Schuldenabbau, Transparenz. Zustimmen, wenn es trägt – ablehnen, wenn nicht.</p></div>
 <div class="table-wrap reveal"><table class="fin"><thead><tr><th>Jahr</th><th>Votum</th><th>Begründung</th></tr></thead><tbody>{"".join(f'<tr><td><b>{y}</b></td><td><span class="pill {c}">{v}</span></td><td>{t}</td></tr>' for y,v,c,t in fin)}</tbody></table></div></div></section>
 {band("Ihre Idee fehlt?","Sagen Sie uns, was Oelde braucht – wir nehmen es mit in den Rat.","kontakt.html","Kontakt aufnehmen")}''')
 
