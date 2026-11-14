@@ -202,6 +202,7 @@ pages["programm.html"] = ("Programm","Das Wahlprogramm 2025 der FWG Oelde und de
 
 # ---------- Aktuelles
 posts=[("November 2026","📊","t3","Bericht: Haushaltsberatungen","Wir berichten über die Haushaltsberatungen im Rat – der Bericht folgt im November.","Folgt",""),
+("2026","🏥","t3","Marienhospital Oelde: Schließung trifft die Stadt","Die Katholische Hospitalvereinigung Ostwestfalen schließt das Marienhospital zum Jahresende 2026. Die FWG fordert Transparenz über die wirtschaftlichen Gründe, ein Konzept für die wohnortnahe Versorgung und mehr als ein bloßes Bekenntnis zum Standort.","Stellungnahme","marienhospital-2026.html"),
 ("Haushalt 2026","🎤","t1","Haushaltsrede von Thorsten Retzlaff","Die letzte Haushaltsrede unseres Fraktionsvorsitzenden Thorsten Retzlaff. Der Rat verabschiedete den Etat 2026 mit den Stimmen von CDU, FWG, FDP, Volt und Linken. Die Rede im Wortlaut wird hier veröffentlicht.","Rede",""),
 ("Juli 2026","🗳️","t2","FWG wählt Bernhard Poppenberg zum neuen Vorsitzenden","Nach fast 17 Jahren gibt Friedhelm Hoberg den Vorsitz ab. Bei der Mitgliederversammlung im Sportlerheim Lette wurde Bernhard Poppenberg einstimmig zum Nachfolger gewählt. Dazu Berichte aus Kreistag und Rat und große Sorgen um die Stadtfinanzen.","Bericht","jahreshauptversammlung-2026.html")]
 pages["aktuelles.html"] = ("Aktuelles","Neuigkeiten, Besuche und Positionen der FWG Oelde.", hero("Aktuelles 2026","Neuigkeiten aus Oelde.","Berichte und Positionen der FWG aus dem laufenden Jahr.")+f'''
@@ -226,6 +227,21 @@ pages["jahreshauptversammlung-2026.html"] = ("Neuer Vorsitzender","FWG wählt Be
 <div class="card reveal"><h3>Der neue Vorstand</h3><ul class="mini-list"><li>Bernhard Poppenberg<small>Vorsitzender</small></li><li>Achim Hakenholt<small>Stellv. Vorsitzender</small></li><li>Alexander Fertich<small>Kassierer</small></li><li>Wolf-Rüdiger Soldat<small>Schriftführer</small></li><li>Hubert Bleß<small>Beisitzer</small></li><li>Friedhelm Hoberg<small>Beisitzer</small></li><li>Ludger Lücke<small>Beisitzer</small></li><li>Thomas Populoh<small>Beisitzer</small></li><li>Thorsten Retzlaff<small>Beisitzer</small></li><li>Manuela Steuer<small>Beisitzerin</small></li><li>Harald Herklotz<small>Beisitzer</small></li></ul></div>
 <p style="margin-top:1.5rem">Im Anschluss an den offiziellen Teil klang der Abend bei Grillwurst und kühlen Getränken aus. Organisiert wurde dieser Teil von Achim Hakenholt und Thomas Populoh, denen die Versammlung ein großes Lob aussprach.</p>
 <p><a class="btn btn-dark" href="aktuelles.html">← Alle Beiträge</a></p>
+</div></div></section>''')
+
+# ---------- Artikel: Marienhospital
+pages["marienhospital-2026.html"] = ("Marienhospital","Die FWG Oelde zur Schließung des Marienhospitals: Transparenz, ein Versorgungskonzept und gemeinsames Handeln aller Fraktionen.", hero("Aktuelles · Stellungnahme","Marienhospital Oelde: Die Schließung trifft die ganze Stadt","Die FWG fordert Transparenz über die Hintergründe und ein tragfähiges Konzept für die medizinische Versorgung vor Ort.")+f'''
+<section><div class="container article"><div class="prose">
+<p class="lead">Die Katholische Hospitalvereinigung Ostwestfalen (KHO) hat angekündigt, das Marienhospital in Oelde zum Jahresende 2026 zu schließen. Betroffen sind rund 400 Beschäftigte. Die ambulanten Angebote (MVZ und AOZ) sollen ab Januar 2027 weitergeführt werden, eine stationäre Versorgung wird es danach nicht mehr geben.</p>
+<h2>Gemeinsam für die Versorgung vor Ort</h2>
+<p>Alle Fraktionen im Rat und Bürgermeisterin Karin Rodeheger haben dazu eine gemeinsame Stellungnahme abgegeben, für die FWG unterzeichnet von Fraktionsvorsitzendem Thorsten Retzlaff. Darin bekennen sie sich geschlossen zu einer starken, wohnortnahen und verlässlichen medizinischen Versorgung. Von der KHO-Geschäftsführung erwarten sie, ihrer Verantwortung gegenüber den Beschäftigten gerecht zu werden. Von Land und Kreis erwarten sie Konzepte für die wohnortnahe Versorgung.</p>
+<h2>Unsere Position</h2>
+<p>Ein Bekenntnis zum Standort allein reicht der FWG nicht. Wir fordern:</p>
+{ul(["Transparenz über die wesentlichen wirtschaftlichen Fakten und die Gründe für die Entwicklung","Offenlegung, welche Unterstützung die Träger bisher geleistet haben und welchen Beitrag sie künftig leisten wollen","Klarheit darüber, welche Gesundheitsversorgung Oelde langfristig braucht und wie sie gesichert werden kann"])}
+<h2>Kein neues Thema für die FWG</h2>
+<p>Schon in unserem Wahlprogramm 2020 haben wir ein Maßnahmenpaket gegen eine drohende Unterversorgung gefordert und dafür geworben, die Standortvorteile Oeldes bei der Anwerbung medizinischen Personals offensiver zu kommunizieren. <a href="programm.html#programm2020">Zum Programm 2020</a></p>
+<div class="card reveal"><h3>Quellen</h3><ul class="checks"><li><a href="https://www.oelde.de/de/rathaus/veroeffentlichungen/gut-zu-wissen/gemeinsame-stellungnahme-der-fraktionen-und-von-buergermeisterin-karin-rodeheger/" target="_blank" rel="noopener">Gemeinsame Stellungnahme der Fraktionen und der Bürgermeisterin (Stadt Oelde)</a></li><li><a href="https://www.die-glocke.de/kreis-warendorf/oelde/artikel/marienhospital-oelde-bekenntnis-zum-standort-reicht-nicht-1786288223" target="_blank" rel="noopener">„Bekenntnis zum Standort reicht nicht“ (Die Glocke)</a></li><li><a href="https://www.bibliomedmanager.de/news/marienhospital-oelde-schliessung-medizinische-versorgung" target="_blank" rel="noopener">Stadt fordert Versorgungskonzept (bibliomedmanager.de)</a></li></ul></div>
+<p style="margin-top:1.5rem"><a class="btn btn-dark" href="aktuelles.html">← Alle Beiträge</a></p>
 </div></div></section>''')
 
 # ---------- Termine
