@@ -85,12 +85,17 @@ VORSTAND = [dict(P[i], tag="Vorstand", role=r, bio=b) for i,r,b in [
  ("hakenholt","Stellv. Vorsitzender","Beisitzer, jetzt stellvertretender Vorsitzender. Sachkundiger Bürger aus Lette."),
  ("fertich","Kassierer","Verwaltet die Vereinsfinanzen. Sachkundiger Bürger für Schule, Kultur und Sport."),
  ("soldat","Schriftführer","Führt das Protokoll des Vereins.")]]
+THUMB_ALT = {"assets/img/news/haushaltsberatungen-2026.jpg": "Gruppenbild vor einem Gebäude, eine Person hält den Entwurf des Produkthaushalts 2027"}
+def thumb(e,c):
+    if e.startswith("assets/"):
+        return f'<div class="thumb thumbimg"><img src="{e}" alt="{THUMB_ALT.get(e,"")}" loading="lazy"></div>'
+    return f'<div class="thumb {c}">{e}</div>'
 def post_card(d,e,c,t,x,k,l):
     more = f'<a class="more" href="{l}">Bericht lesen →</a>' if l else ""
-    return f'<article class="card news reveal"><div class="thumb {c}">{e}</div><span class="meta">{d} · <b>{k}</b></span><h3>{t}</h3><p>{x}</p>{more}</article>'
+    return f'<article class="card news reveal">{thumb(e,c)}<span class="meta">{d} · <b>{k}</b></span><h3>{t}</h3><p>{x}</p>{more}</article>'
 def news_card(d,e,c,t,x,l):
     href = l or "aktuelles.html"; label = "Bericht lesen" if l else "Alle Beiträge"
-    return f'<article class="card news reveal"><div class="thumb {c}">{e}</div><span class="meta">{d}</span><h3>{t}</h3><p>{x}</p><a class="more" href="{href}">{label} →</a></article>'
+    return f'<article class="card news reveal">{thumb(e,c)}<span class="meta">{d}</span><h3>{t}</h3><p>{x}</p><a class="more" href="{href}">{label} →</a></article>'
 
 
 # ---------- Programm 2020 (Rückblick)
@@ -149,7 +154,7 @@ pages = {}
 home_cards = "".join(card(i,t,d,f"programm.html#{k}") for k,i,t,d,_ in [topics[1],topics[2],topics[3],topics[6],topics[5],topics[0]])
 news = [("Juli 2026","🗳️","t2","Neuer Vorsitzender gewählt","Bernhard Poppenberg wird einstimmig zum neuen Vorsitzenden gewählt – Friedhelm Hoberg gibt nach knapp 17 Jahren ab.","jahreshauptversammlung-2026.html"),
 ("Haushalt 2026","🎤","t1","Letzte Haushaltsrede","Unser Fraktionsvorsitzender Thorsten Retzlaff hat für die FWG zum städtischen Haushalt Stellung genommen.",""),
-("November 2026","📊","t3","Haushaltsberatungen","Unser Bericht über die Beratungen folgt im November.","")]
+("November 2026","assets/img/news/haushaltsberatungen-2026.jpg","t3","Haushaltsberatungen","Unser Bericht über die Beratungen zum Haushaltsentwurf 2027 folgt.","")]
 pages["index.html"] = ("Start","Die Freie Wählergemeinschaft Oelde: unabhängig, überparteilich und bürgernah – seit 1994 im Stadtrat.", f'''
 <div class="hero"><span class="blob b1"></span><span class="blob b2"></span><div class="container hero-grid">
 <div><span class="eyebrow">Freie Wählergemeinschaft · seit 1994</span>
@@ -216,7 +221,7 @@ pages["programm.html"] = ("Programm","Das Wahlprogramm 2025 der FWG Oelde und de
 {band("Ihre Idee fehlt?","Sagen Sie uns, was Oelde braucht – wir nehmen es mit in den Rat.","kontakt.html","Kontakt aufnehmen")}''')
 
 # ---------- Aktuelles
-posts=[("November 2026","📊","t3","Bericht: Haushaltsberatungen","Wir berichten über die Haushaltsberatungen im Rat – der Bericht folgt im November.","Folgt",""),
+posts=[("November 2026","assets/img/news/haushaltsberatungen-2026.jpg","t3","Bericht: Haushaltsberatungen","Wir berichten über die Beratungen zum Haushaltsentwurf 2027 im Rat – der Bericht folgt.","Folgt",""),
 ("2026","🏥","t3","Marienhospital Oelde: Schließung trifft die Stadt","Die Katholische Hospitalvereinigung Ostwestfalen schließt das Marienhospital zum Jahresende 2026. Die FWG fordert Transparenz über die wirtschaftlichen Gründe, ein Konzept für die wohnortnahe Versorgung und mehr als ein bloßes Bekenntnis zum Standort.","Stellungnahme","marienhospital-2026.html"),
 ("Haushalt 2026","🎤","t1","Haushaltsrede von Thorsten Retzlaff","Die letzte Haushaltsrede unseres Fraktionsvorsitzenden Thorsten Retzlaff. Der Rat verabschiedete den Etat 2026 mit den Stimmen von CDU, FWG, FDP, Volt und Linken. Die Rede im Wortlaut wird hier veröffentlicht.","Rede",""),
 ("Juli 2026","🗳️","t2","FWG wählt Bernhard Poppenberg zum neuen Vorsitzenden","Nach fast 17 Jahren gibt Friedhelm Hoberg den Vorsitz ab. Bei der Mitgliederversammlung im Sportlerheim Lette wurde Bernhard Poppenberg einstimmig zum Nachfolger gewählt. Dazu Berichte aus Kreistag und Rat und große Sorgen um die Stadtfinanzen.","Bericht","jahreshauptversammlung-2026.html")]

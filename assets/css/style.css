@@ -157,3 +157,4 @@ button[disabled]{opacity:.6;cursor:wait}
 .cand-pills{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:auto;padding-top:.5rem}.muted{color:var(--muted)}
 .cand-empty[hidden]{display:none}
 .stats3{grid-template-columns:repeat(3,1fr)}@media(max-width:600px){.stats3{gap:.6rem}.stats3 .stat{padding:1rem .4rem}.stats3 .stat b{font-size:1.7rem}.stats3 .stat span{font-size:.78rem}}
+.news .thumbimg{padding:0;overflow:hidden;background:var(--green-l)}.news .thumbimg img{width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block}
