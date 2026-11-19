@@ -85,7 +85,7 @@ VORSTAND = [dict(P[i], tag="Vorstand", role=r, bio=b) for i,r,b in [
  ("hakenholt","Stellv. Vorsitzender","Beisitzer, jetzt stellvertretender Vorsitzender. Sachkundiger Bürger aus Lette."),
  ("fertich","Kassierer","Verwaltet die Vereinsfinanzen. Sachkundiger Bürger für Schule, Kultur und Sport."),
  ("soldat","Schriftführer","Führt das Protokoll des Vereins.")]]
-THUMB_ALT = {"assets/img/news/haushaltsberatungen-2026.jpg": "Gruppenbild vor einem Gebäude, eine Person hält den Entwurf des Produkthaushalts 2027"}
+THUMB_ALT = {"assets/img/news/gruppe.jpg": "Gruppenfoto der Teilnehmenden der Mitgliederversammlung vor dem Sportlerheim Lette", "assets/img/news/haushaltsberatungen-2026.jpg": "Gruppenbild vor einem Gebäude, eine Person hält den Entwurf des Produkthaushalts 2027"}
 def thumb(e,c):
     if e.startswith("assets/"):
         return f'<div class="thumb thumbimg"><img src="{e}" alt="{THUMB_ALT.get(e,"")}" loading="lazy"></div>'
@@ -152,7 +152,7 @@ wk_posts = [
 pages = {}
 # ---------- Start
 home_cards = "".join(card(i,t,d,f"programm.html#{k}") for k,i,t,d,_ in [topics[1],topics[2],topics[3],topics[6],topics[5],topics[0]])
-news = [("Juli 2026","🗳️","t2","Neuer Vorsitzender gewählt","Bernhard Poppenberg wird einstimmig zum neuen Vorsitzenden gewählt – Friedhelm Hoberg gibt nach knapp 17 Jahren ab.","jahreshauptversammlung-2026.html"),
+news = [("Juli 2026","assets/img/news/gruppe.jpg","t2","Neuer Vorsitzender gewählt","Bernhard Poppenberg wird einstimmig zum neuen Vorsitzenden gewählt – Friedhelm Hoberg gibt nach knapp 17 Jahren ab.","jahreshauptversammlung-2026.html"),
 ("Haushalt 2026","🎤","t1","Letzte Haushaltsrede","Unser Fraktionsvorsitzender Thorsten Retzlaff hat für die FWG zum städtischen Haushalt Stellung genommen.",""),
 ("15. November 2026","assets/img/news/haushaltsberatungen-2026.jpg","t3","Haushaltsberatung der FWG","Verantwortungsvoll mit den Finanzen umgehen und wichtige Angebote der Stadt erhalten.","haushaltsberatung-2026.html")]
 pages["index.html"] = ("Start","Die Freie Wählergemeinschaft Oelde: unabhängig, überparteilich und bürgernah – seit 1994 im Stadtrat.", f'''
@@ -224,7 +224,7 @@ pages["programm.html"] = ("Programm","Das Wahlprogramm 2025 der FWG Oelde und de
 posts=[("15. November 2026","assets/img/news/haushaltsberatungen-2026.jpg","t3","Haushaltsberatung der FWG: Verantwortungsvoll mit den Finanzen umgehen","Die FWG berät den Haushaltsentwurf 2027: rund sechs Millionen Euro Finanzierungslücke, Gewerbesteuer von 413 auf 430 Punkte und eine höhere Kreisumlage. Wichtige Angebote der Stadt sollen erhalten bleiben.","Bericht","haushaltsberatung-2026.html"),
 ("2026","🏥","t3","Marienhospital Oelde: Schließung trifft die Stadt","Die Katholische Hospitalvereinigung Ostwestfalen schließt das Marienhospital zum Jahresende 2026. Die FWG fordert Transparenz über die wirtschaftlichen Gründe, ein Konzept für die wohnortnahe Versorgung und mehr als ein bloßes Bekenntnis zum Standort.","Stellungnahme","marienhospital-2026.html"),
 ("Haushalt 2026","🎤","t1","Haushaltsrede von Thorsten Retzlaff","Die letzte Haushaltsrede unseres Fraktionsvorsitzenden Thorsten Retzlaff. Der Rat verabschiedete den Etat 2026 mit den Stimmen von CDU, FWG, FDP, Volt und Linken. Die Rede im Wortlaut wird hier veröffentlicht.","Rede",""),
-("Juli 2026","🗳️","t2","FWG wählt Bernhard Poppenberg zum neuen Vorsitzenden","Nach fast 17 Jahren gibt Friedhelm Hoberg den Vorsitz ab. Bei der Mitgliederversammlung im Sportlerheim Lette wurde Bernhard Poppenberg einstimmig zum Nachfolger gewählt. Dazu Berichte aus Kreistag und Rat und große Sorgen um die Stadtfinanzen.","Bericht","jahreshauptversammlung-2026.html")]
+("Juli 2026","assets/img/news/gruppe.jpg","t2","FWG wählt Bernhard Poppenberg zum neuen Vorsitzenden","Nach fast 17 Jahren gibt Friedhelm Hoberg den Vorsitz ab. Bei der Mitgliederversammlung im Sportlerheim Lette wurde Bernhard Poppenberg einstimmig zum Nachfolger gewählt. Dazu Berichte aus Kreistag und Rat und große Sorgen um die Stadtfinanzen.","Bericht","jahreshauptversammlung-2026.html")]
 pages["aktuelles.html"] = ("Aktuelles","Neuigkeiten, Besuche und Positionen der FWG Oelde.", hero("Aktuelles 2026","Neuigkeiten aus Oelde.","Berichte und Positionen der FWG aus dem laufenden Jahr.")+f'''
 <section><div class="container"><div class="grid g3">{"".join(post_card(*p) for p in posts)}</div></div></section>
 <section class="alt" id="wahlkampf2025"><div class="container"><div class="section-head reveal"><span class="eyebrow">Rückblick</span><h2>Wahlkampf 2025</h2><p class="lead">Aktionen und Beiträge zur Kommunalwahl am 14. September 2025.</p></div><div class="grid g3">{"".join(post_card(*p) for p in reversed(wk_posts))}</div></div></section>''')
