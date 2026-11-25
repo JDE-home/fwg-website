@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#29488b">
+<title>Geschützter Bereich – FWG Oelde</title>
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+body.login{min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(700px 420px at 85% 0%,color-mix(in srgb,var(--orange) 22%,transparent),transparent 60%),radial-gradient(800px 500px at 0% 100%,color-mix(in srgb,var(--blue-m) 28%,transparent),transparent 60%),var(--bg)}
+.login-box{width:100%;max-width:420px;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:44px 36px;box-shadow:var(--shadow);text-align:center}
+.login-box .logo-big{display:block;width:84px;height:84px;margin:0 auto 22px;border-radius:24px;overflow:hidden;box-shadow:0 12px 28px -10px var(--green)}
+.login-box .logo-big img{width:100%;height:100%;object-fit:cover}
+.login-box h1{font-size:1.7rem;margin-bottom:.4rem}
+.login-box p{color:var(--muted);font-size:.95rem;margin:.4rem 0 1.6rem}
+.login-box input{width:100%;text-align:center;margin-bottom:14px}
+.login-box .btn{width:100%;justify-content:center}
+.login-err{color:#c2312f;font-size:.88rem;min-height:1.4em;margin-top:12px}
+@media(prefers-color-scheme:dark){.login-err{color:#ff9d92}}
+.login-legal{position:fixed;bottom:10px;left:0;right:0;text-align:center;font-size:.82rem;margin:0}
+.login-legal a{color:var(--muted);text-decoration:underline;display:inline-flex;align-items:center;min-height:44px;padding:0 10px}
+</style>
+</head>
+<body class="login">
+<form class="login-box" id="form" autocomplete="off">
+  <span class="logo-big"><img src="/assets/img/logo.jpg" alt="FWG Oelde" width="84" height="84"></span>
+  <h1>Geschützter Bereich</h1>
+  <p>Diese Seite ist noch nicht öffentlich. Bitte geben Sie das Passwort ein, um sie zu öffnen.</p>
+  <input id="pw" type="password" placeholder="Passwort" aria-label="Passwort" autocomplete="current-password" required autofocus>
+  <button class="btn btn-primary" type="submit">Entsperren</button>
+  <div class="login-err" id="err" role="alert"></div>
+</form>
+<p class="login-legal"><a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a></p>
+<script>
+const form=document.getElementById('form'),pw=document.getElementById('pw'),err=document.getElementById('err'),btn=form.querySelector('button');
+form.addEventListener('submit',async e=>{
+  e.preventDefault();btn.disabled=true;err.textContent='';
+  try{
+    const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pw.value})});
+    if(r.ok){const n=new URLSearchParams(location.search).get('next');location.replace(n&&n.startsWith('/')&&!n.startsWith('//')?n:'/');return}
+    err.textContent=r.status===503?'Der Zugang ist noch nicht eingerichtet.':'Falsches Passwort. Bitte versuchen Sie es erneut.';
+    pw.select();
+  }catch(_){err.textContent='Keine Verbindung. Bitte versuchen Sie es erneut.'}
+  btn.disabled=false;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "fwg-oelde-website",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@vercel/functions": "^2.0.0"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  }
+}

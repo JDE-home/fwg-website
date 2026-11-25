@@ -1,6 +1,11 @@
-# Nicht auf Vercel ausliefern: Build-Werkzeuge, Rohdaten, PHP-Formular (läuft auf Vercel nicht)
+# Nicht auf Vercel ausliefern: Build-Werkzeuge, Rohdaten, Tests und das PHP-Formular (läuft auf Vercel nicht).
+# api/login.js (Passwortschutz) wird dagegen deployt.
 build.py
 tools_avatars.py
 people.json
+candidates.json
 README.md
-api/
+tests/
+api/contact.php
+api/config.php
+api/.htaccess

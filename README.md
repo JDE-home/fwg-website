@@ -19,13 +19,23 @@ Die Formulare auf `kontakt.html` und `mitmachen.html` senden per `fetch` an `api
 
 ## Passwortschutz (Vercel)
 
-`middleware.js` schützt die gesamte Seite per HTTP-Basic-Auth (Browser-Passwortabfrage).
+Der Schutz arbeitet mit einer Login-Seite und einem Cookie, wie bei Finanzkonzepte Desel:
 
-1. In Vercel: **Project → Settings → Environment Variables** → Variable `SITE_PASSWORD` mit dem gewünschten Passwort anlegen (für Production und ggf. Preview).
-2. Neu deployen (Variablen gelten erst für neue Deployments).
-3. Beim Aufruf fragt der Browser nach Benutzername und Passwort. Der **Benutzername ist beliebig**, nur das Passwort wird geprüft.
+- `login.html` ist die Anmeldeseite, sie schickt das Passwort an `api/login.js`.
+- `api/login.js` prüft das Passwort und setzt bei Erfolg das Cookie `fwg_auth` (7 Tage, `HttpOnly`, `Secure`, `SameSite=Lax`).
+- `middleware.js` leitet alle Seiten ohne gültiges Cookie auf `/login.html` um. Öffentlich bleiben Login, Impressum, Datenschutz und `assets/`.
+- `auth.js` enthält die gemeinsame Token-Logik. Das Passwort steht nie im Code.
 
-Ist `SITE_PASSWORD` nicht gesetzt, antwortet die Seite mit 503 und bleibt gesperrt. Zum Livegang die Middleware entfernen (Datei `middleware.js` löschen). `.vercelignore` schließt Build-Werkzeuge, `people.json`, README und das PHP-Formular vom Deployment aus; das PHP-Kontaktformular läuft auf Vercel nicht.
+**Einrichten:**
+1. In Vercel: **Project → Settings → Environment Variables** → `SITE_PASSWORD` mit dem gewünschten Passwort anlegen (Production und Preview).
+2. **Neu deployen** (Variablen gelten erst für neue Deployments).
+3. Beim Aufruf erscheint die Login-Seite. Wird das Passwort geändert, müssen sich alle erneut anmelden.
+
+Ist `SITE_PASSWORD` nicht gesetzt, bleibt die Seite gesperrt. Lokal testen: `npm install`, `npm test` (Tests für Login und Middleware), `npx vercel dev`.
+
+`vercel.json` setzt die Region Frankfurt und den Header `X-Robots-Tag: noindex`. `.vercelignore` schließt Build-Werkzeuge, Rohdaten, Tests und das PHP-Formular vom Deployment aus.
+
+**Passwortschutz abschalten (Livegang):** `middleware.js`, `auth.js`, `api/login.js` und `login.html` löschen, den Header `X-Robots-Tag` in `vercel.json` entfernen und in `build.py` den Absatz „Passwortgeschützter Bereich“ der Datenschutzerklärung streichen (danach `python3 build.py`). Nur die Variable zu löschen reicht nicht, ohne `SITE_PASSWORD` bleibt die Seite gesperrt, solange `middleware.js` existiert.
 
 ## Kandidatenübersicht 2025 (versteckte Seite)
 
